@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Can't decide what to eat? Use our food generator for random meal ideas.">
+    <meta name="description" content="Can't decide what to eat? Let the Food Generator help.">
     <meta property="og:title" content="Food Generator - Streets Services">
-    <meta property="og:description" content="Randomly generate meal ideas for lunch, dinner, meal deals and restaurants.">
+    <meta property="og:description" content="Random meal ideas for lunch, dinner, and meal deals.">
     <meta property="og:image" content="https://streetsservices.co.uk/pictures/icon.png">
     <meta property="og:url" content="https://streetsservices.co.uk/pages/food.html">
     <meta property="og:type" content="website">
@@ -14,187 +14,107 @@
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .edit-list { list-style: none; padding: 0; margin: 0.75rem 0; }
-        .add-row { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
-        .add-row input {
-            flex: 1;
-            padding: 0.6rem 0.75rem;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-family);
-        }
-        .add-row input:focus { outline: none; border-color: var(--primary-color); }
-        .add-btn {
-            background: #10b981;
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        .add-btn:hover { background: #059669; }
-        .reset-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 1rem;
-            width: 100%;
-        }
-        .reset-btn:hover { background: #dc2626; }
-        .edit-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-        .edit-section {
-            background: var(--bg-dark);
-            padding: 1.25rem;
-            border-radius: var(--radius-md);
-            border: 2px solid var(--border-color);
-        }
-        .edit-section h4 { color: var(--accent-color); margin-bottom: 0.5rem; }
+        .gen-card{background:var(--bg-card);border:1px solid var(--border);padding:28px;transition:background .2s;}
+        .gen-card:hover{background:var(--bg-hover);}
+        .gen-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text);margin-bottom:16px;}
+        .result-display{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--accent);min-height:40px;margin:16px 0;letter-spacing:-0.5px;}
+        .btn-primary{padding:12px 24px;background:transparent;border:1px solid var(--accent);color:var(--accent);font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;width:100%;}
+        .btn-primary:hover{background:var(--accent);color:#0e0e0e;}
     </style>
     <link rel="canonical" href="https://streetsservices.co.uk/pages/food.html">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Food Generator</h1>
-        </div>
-        <p class="tagline">Can't Decide What to Eat? Let Us Help!</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>food</span>
+    </nav>
+
+    <header class="page-header">
+        <p class="page-eyebrow">Fun</p>
+        <h1>Food Generator</h1>
+        <p>Can't decide what to eat? Let us help.</p>
     </header>
 
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
+    <main id="main" class="content">
 
-        <!-- Generators Section -->
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('generators-content')">
-                <h2>Food Generators</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Generators</h2>
+                <span class="block-line" aria-hidden="true"></span>
             </div>
-            <div id="generators-content" class="section-content active">
-                <div class="generators-grid">
-                    <article class="generator-section">
-                        <h3>🥪 Lunch Ideas</h3>
-                        <div class="generator-controls">
-                            <button class="generator-button" onclick="generateLunch()" aria-label="Generate random lunch idea">Generate Random Lunch</button>
-                            <div id="lunch-result" class="result-display" role="status" aria-live="polite"></div>
-                        </div>
-                    </article>
-                    <article class="generator-section">
-                        <h3>🍽️ Dinner Ideas</h3>
-                        <div class="generator-controls">
-                            <button class="generator-button" onclick="generateDinner()" aria-label="Generate random dinner idea">Generate Random Dinner</button>
-                            <div id="dinner-result" class="result-display" role="status" aria-live="polite"></div>
-                        </div>
-                    </article>
-                    <article class="generator-section">
-                        <h3>💰 Meal Deals</h3>
-                        <div class="generator-controls">
-                            <button class="generator-button" onclick="generateMealDeal()" aria-label="Generate random meal deal">Generate Random Meal Deal</button>
-                            <div id="meal-deal-result" class="result-display" role="status" aria-live="polite"></div>
-                        </div>
-                    </article>
-                    <article class="generator-section">
-                        <h3>🏪 Places to Go Out</h3>
-                        <div class="generator-controls">
-                            <button class="generator-button" onclick="generateOut()" aria-label="Generate random place to eat out">Generate Random Place</button>
-                            <div id="out-result" class="result-display" role="status" aria-live="polite"></div>
-                        </div>
-                    </article>
+
+            <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+                <div class="gen-card">
+                    <p class="gen-title">🥪 Lunch Ideas</p>
+                    <div id="lunch-result" class="result-display" role="status" aria-live="polite"></div>
+                    <button class="btn-primary" onclick="generateLunch()">Generate Random Lunch</button>
+                </div>
+                <div class="gen-card">
+                    <p class="gen-title">🍽️ Dinner Ideas</p>
+                    <div id="dinner-result" class="result-display" role="status" aria-live="polite"></div>
+                    <button class="btn-primary" onclick="generateDinner()">Generate Random Dinner</button>
+                </div>
+                <div class="gen-card">
+                    <p class="gen-title">💰 Meal Deals</p>
+                    <div id="meal-deal-result" class="result-display" role="status" aria-live="polite"></div>
+                    <button class="btn-primary" onclick="generateMealDeal()">Generate Random Meal Deal</button>
+                </div>
+                <div class="gen-card">
+                    <p class="gen-title">🍴 Go Out</p>
+                    <div id="out-result" class="result-display" role="status" aria-live="polite"></div>
+                    <button class="btn-primary" onclick="generateOut()">Pick a Restaurant</button>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Edit Options Section -->
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('edit-content')">
-                <h2>Customise Options</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
-            </div>
-            <div id="edit-content" class="section-content">
-                <p style="color:var(--text-secondary);margin-bottom:1.5rem;">Add or remove options from each category. Your changes are saved locally in your browser.</p>
-                <div class="edit-grid">
-                    <div class="edit-section">
-                        <h4>🥪 Lunch</h4>
-                        <ul id="edit-lunch" class="edit-list"></ul>
-                        <div class="add-row">
-                            <input type="text" id="add-lunch" placeholder="Add lunch option..." onkeypress="if(event.key==='Enter')addFoodItem('lunch')">
-                            <button class="add-btn" onclick="addFoodItem('lunch')">+ Add</button>
-                        </div>
-                    </div>
-                    <div class="edit-section">
-                        <h4>🍽️ Dinner</h4>
-                        <ul id="edit-dinner" class="edit-list"></ul>
-                        <div class="add-row">
-                            <input type="text" id="add-dinner" placeholder="Add dinner option..." onkeypress="if(event.key==='Enter')addFoodItem('dinner')">
-                            <button class="add-btn" onclick="addFoodItem('dinner')">+ Add</button>
-                        </div>
-                    </div>
-                    <div class="edit-section">
-                        <h4>💰 Meal Deals</h4>
-                        <ul id="edit-mealDeal" class="edit-list"></ul>
-                        <div class="add-row">
-                            <input type="text" id="add-mealDeal" placeholder="Add meal deal..." onkeypress="if(event.key==='Enter')addFoodItem('mealDeal')">
-                            <button class="add-btn" onclick="addFoodItem('mealDeal')">+ Add</button>
-                        </div>
-                    </div>
-                    <div class="edit-section">
-                        <h4>🏪 Go Out</h4>
-                        <ul id="edit-out" class="edit-list"></ul>
-                        <div class="add-row">
-                            <input type="text" id="add-out" placeholder="Add restaurant..." onkeypress="if(event.key==='Enter')addFoodItem('out')">
-                            <button class="add-btn" onclick="addFoodItem('out')">+ Add</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="reset-btn" onclick="resetFoodData()">↺ Reset to Defaults</button>
-            </div>
-        </section>
-
-        <!-- Available Options (read-only list, kept in sync) -->
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('options-content')">
-                <h2>Available Options</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
-            </div>
-            <div id="options-content" class="section-content">
-                <div class="about-grid">
-                    <article class="about-card">
-                        <h3>Lunch Options</h3>
-                        <ul id="options-lunch"></ul>
-                    </article>
-                    <article class="about-card">
-                        <h3>Dinner Options</h3>
-                        <ul id="options-dinner"></ul>
-                    </article>
-                    <article class="about-card">
-                        <h3>Meal Deal Options</h3>
-                        <ul id="options-mealDeal"></ul>
-                    </article>
-                    <article class="about-card">
-                        <h3>Restaurant Options</h3>
-                        <ul id="options-out"></ul>
-                    </article>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">← Back to Home</a>
     </footer>
 
     <script src="../app.js"></script>
+    <script>
+        const DEFAULT_FOOD_DATA = {
+            lunch:    ['Wraps','Cheesy Wraps','Toast','Noodles','Pate on Toast','Sandwiches','Bacon Sandwiches','Warm Rolls','Beans on Toast','Fried Egg Sandwich','Go Out'],
+            dinner:   ['Burgers','Pizza','Homemade Pizza','Korma','Butter Chicken','Spaghetti Bolognese','Chilli Con Carne','Cheesy Bacon Pasta','Honey Sesame Chicken','Chicken Nuggets & Chips','Lasagna','Pasta Bake','Meatloaf','Fish & Chips','Stuffed Garlic Baguettes','Go Out'],
+            mealDeal: ['Sausage & Mash','Chicken Korma','Meatballs & Pasta'],
+            out:      ['McDonald\'s','Subway','KFC','Nandos','Green King','Weatherspoon\'s'],
+        };
+
+        function getFoodData() {
+            try { const s = localStorage.getItem('foodData'); return s ? JSON.parse(s) : DEFAULT_FOOD_DATA; }
+            catch { return DEFAULT_FOOD_DATA; }
+        }
+
+        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+        function show(id, val) {
+            const el = document.getElementById(id);
+            el.style.opacity = '0';
+            setTimeout(() => { el.textContent = val; el.style.opacity = '1'; el.style.transition = 'opacity .3s'; }, 50);
+        }
+
+        function generateLunch()   { show('lunch-result',    pick(getFoodData().lunch)); }
+        function generateDinner()  { show('dinner-result',   pick(getFoodData().dinner)); }
+        function generateMealDeal(){ show('meal-deal-result', pick(getFoodData().mealDeal)); }
+        function generateOut()     { show('out-result',       pick(getFoodData().out)); }
+    </script>
 </body>
 </html>

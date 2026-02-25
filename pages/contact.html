@@ -13,212 +13,136 @@
     <title>Contact - Streets Services</title>
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
-    <style>
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        .contact-form-section, .contact-info-section {
-            background: var(--bg-dark);
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            border: 2px solid var(--border-color);
-        }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .cf-group { margin-bottom: 1.5rem; }
-        .cf-group label { display: block; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem; }
-        .cf-group input, .cf-group textarea, .cf-group select {
-            width: 100%;
-            padding: 0.875rem;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-size: var(--font-size-base);
-            font-family: var(--font-family);
-            transition: all var(--transition-base);
-        }
-        .cf-group input:focus, .cf-group textarea:focus, .cf-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-        }
-        .cf-group textarea { min-height: 150px; resize: vertical; }
-        .cf-group select { cursor: pointer; }
-        .cf-group input::placeholder, .cf-group textarea::placeholder { color: var(--text-secondary); opacity: 0.5; }
-        .submit-button {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: all var(--transition-base);
-            box-shadow: var(--shadow-md);
-            width: 100%;
-        }
-        .submit-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(59,130,246,0.4); }
-        .submit-button:disabled { opacity: 0.6; cursor: not-allowed; }
-        .contact-method {
-            display: flex;
-            align-items: start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            margin-bottom: 1rem;
-            transition: all var(--transition-base);
-        }
-        .contact-method:hover { border-left: 4px solid var(--primary-color); padding-left: calc(1.5rem - 4px); }
-        .contact-icon { font-size: 2rem; min-width: 40px; }
-        .contact-details h4 { color: var(--accent-color); margin-bottom: 0.5rem; }
-        .contact-details p { color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .contact-details a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
-        .contact-details a:hover { text-decoration: underline; }
-        .status-message {
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            margin-bottom: 1.5rem;
-            display: none;
-        }
-        .status-message.success { background: #10b981; color: white; display: block; }
-        .status-message.error   { background: #ef4444; color: white; display: block; }
-        .required { color: #ef4444; }
-        .formspree-note { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: center; }
-        @media (max-width: 968px) {
-            .contact-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link rel="canonical" href="https://streetsservices.co.uk/pages/contact.html">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Contact</h1>
-        </div>
-        <p class="tagline">Get in Touch</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html" class="active" aria-current="page">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>contact</span>
+    </nav>
+
+    <header class="page-header">
+        <p class="page-eyebrow">Get in Touch</p>
+        <h1>Contact</h1>
+        <p>Reach out for IT support, consultations, or any questions.</p>
     </header>
 
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
+    <main id="main" class="content">
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('contact-content')">
-                <h2>Send a Message</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
-            </div>
-            <div id="contact-content" class="section-content active">
-                <div class="contact-grid">
-                    <!-- Contact Form -->
-                    <div class="contact-form-section">
-                        <h3>Contact Form</h3>
+        <div class="contact-layout">
+            <!-- Form -->
+            <div class="contact-form-area">
+                <div id="status-msg" class="status-msg" role="alert"></div>
 
-                        <div id="status-message" class="status-message" role="alert"></div>
-
-                        <!--
-                            To enable direct form submission, sign up at https://formspree.io
-                            and replace YOUR_FORM_ID below with your actual form ID.
-                            Until then, the form falls back to mailto.
-                        -->
-                        <form id="contact-form" onsubmit="handleSubmit(event)">
-                            <div class="form-row">
-                                <div class="cf-group">
-                                    <label for="first-name">First Name <span class="required">*</span></label>
-                                    <input type="text" id="first-name" name="firstName" placeholder="John" required>
-                                </div>
-                                <div class="cf-group">
-                                    <label for="last-name">Last Name <span class="required">*</span></label>
-                                    <input type="text" id="last-name" name="lastName" placeholder="Smith" required>
-                                </div>
-                            </div>
-                            <div class="cf-group">
-                                <label for="email">Email Address <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" placeholder="john.smith@example.com" required>
-                            </div>
-                            <div class="cf-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" placeholder="+44 7700 900000">
-                            </div>
-                            <div class="cf-group">
-                                <label for="subject">Subject <span class="required">*</span></label>
-                                <select id="subject" name="subject" required>
-                                    <option value="">Please select...</option>
-                                    <option value="general">General Inquiry</option>
-                                    <option value="support">IT Support Request</option>
-                                    <option value="consultation">Consultation</option>
-                                    <option value="collaboration">Collaboration</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="cf-group">
-                                <label for="message">Message <span class="required">*</span></label>
-                                <textarea id="message" name="message" placeholder="Tell me about your project or question..." required></textarea>
-                            </div>
-                            <button type="submit" class="submit-button" id="submit-btn">Send Message</button>
-                            <p class="formspree-note">Replace YOUR_FORM_ID in the page source with your <a href="https://formspree.io" target="_blank" rel="noopener noreferrer">Formspree</a> form ID to receive submissions by email. Until then, the form opens your email client.</p>
-                        </form>
+                <!--
+                    To enable direct form submission, sign up at https://formspree.io
+                    and replace YOUR_FORM_ID below with your actual form ID.
+                    Until then, the form falls back to mailto.
+                -->
+                <form id="contact-form" onsubmit="handleSubmit(event)" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name <span class="required">*</span></label>
+                            <input type="text" id="first-name" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name <span class="required">*</span></label>
+                            <input type="text" id="last-name" name="lastName" placeholder="Smith" required>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="john.smith@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+44 7700 900000">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject <span class="required">*</span></label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Please select...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">IT Support Request</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="collaboration">Collaboration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project or question..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submit-btn">Send Message</button>
+                    <p class="formspree-note">Replace YOUR_FORM_ID in the source with your <a href="https://formspree.io" target="_blank" rel="noopener noreferrer">Formspree</a> form ID to receive emails directly.</p>
+                </form>
+            </div>
 
-                    <!-- Contact Information -->
-                    <div class="contact-info-section">
-                        <h3>Contact Information</h3>
-                        <div class="contact-method">
-                            <div class="contact-icon">📧</div>
-                            <div class="contact-details">
-                                <h4>Email</h4>
-                                <p>Best for detailed inquiries</p>
-                                <a href="mailto:sam@streetsservices.co.uk">sam@streetsservices.co.uk</a>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">💼</div>
-                            <div class="contact-details">
-                                <h4>LinkedIn</h4>
-                                <p>Professional networking</p>
-                                <a href="https://www.linkedin.com/in/sam-streets-535a90187/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">🕐</div>
-                            <div class="contact-details">
-                                <h4>Response Time</h4>
-                                <p>I typically respond within 24–48 hours during business days.</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">📍</div>
-                            <div class="contact-details">
-                                <h4>Location</h4>
-                                <p>Based in the UK.</p>
-                            </div>
-                        </div>
+            <!-- Info -->
+            <div class="contact-info-area">
+                <div class="contact-method">
+                    <span class="cm-icon">📧</span>
+                    <div>
+                        <p class="cm-label">Email</p>
+                        <p class="cm-value">Best for detailed inquiries<br><a href="mailto:sam@streetsservices.co.uk">sam@streetsservices.co.uk</a></p>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <span class="cm-icon">💼</span>
+                    <div>
+                        <p class="cm-label">LinkedIn</p>
+                        <p class="cm-value">Professional networking<br><a href="https://www.linkedin.com/in/sam-streets-535a90187/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></p>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <span class="cm-icon">🕐</span>
+                    <div>
+                        <p class="cm-label">Response Time</p>
+                        <p class="cm-value">I typically respond within 24–48 hours during business days.</p>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <span class="cm-icon">📍</span>
+                    <div>
+                        <p class="cm-label">Location</p>
+                        <p class="cm-value">Based in the UK.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">← Back to Home</a>
     </footer>
 
     <script src="../app.js"></script>
     <script>
-        // Formspree endpoint — replace YOUR_FORM_ID with your actual ID from formspree.io
         const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
-        const USE_FORMSPREE = FORMSPREE_URL.indexOf('YOUR_FORM_ID') === -1;
+        const USE_FORMSPREE = !FORMSPREE_URL.includes('YOUR_FORM_ID');
 
         function showStatus(type, message) {
-            const el = document.getElementById('status-message');
-            el.className = 'status-message ' + type;
+            const el = document.getElementById('status-msg');
+            el.className = 'status-msg ' + type;
             el.textContent = message;
             el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            setTimeout(() => { el.className = 'status-message'; el.textContent = ''; }, 6000);
+            setTimeout(() => { el.className = 'status-msg'; el.textContent = ''; }, 6000);
         }
 
         async function handleSubmit(event) {
@@ -232,11 +156,10 @@
             }
 
             const data = Object.fromEntries(new FormData(form));
-            btn.disabled = true;
+            btn.disabled    = true;
             btn.textContent = 'Sending...';
 
             if (USE_FORMSPREE) {
-                // Send via Formspree
                 try {
                     const res = await fetch(FORMSPREE_URL, {
                         method: 'POST',
@@ -246,18 +169,13 @@
                     if (res.ok) {
                         showStatus('success', '✓ Message sent! I\'ll get back to you soon.');
                         form.reset();
-                    } else {
-                        throw new Error('Server error');
-                    }
+                    } else { throw new Error('Server error'); }
                 } catch (e) {
                     showStatus('error', '✗ Something went wrong. Please try emailing directly.');
                 }
             } else {
-                // Fallback: mailto
                 const subject = encodeURIComponent(`Contact Form: ${data.subject}`);
-                const body    = encodeURIComponent(
-                    `Name: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\n\nMessage:\n${data.message}`
-                );
+                const body    = encodeURIComponent(`Name: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\n\nMessage:\n${data.message}`);
                 window.location.href = `mailto:sam@streetsservices.co.uk?subject=${subject}&body=${body}`;
                 setTimeout(() => {
                     showStatus('success', '✓ Your email client should have opened. If not, email sam@streetsservices.co.uk directly.');
@@ -265,7 +183,7 @@
                 }, 500);
             }
 
-            btn.disabled = false;
+            btn.disabled    = false;
             btn.textContent = 'Send Message';
         }
     </script>

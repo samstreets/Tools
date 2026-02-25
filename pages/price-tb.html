@@ -4,86 +4,79 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Calculate price per terabyte to compare storage drive values.">
-    <meta property="og:title" content="Price per TB Calculator - Streets Services">
-    <meta property="og:description" content="Calculate and compare storage drive value with price per terabyte.">
-    <meta property="og:image" content="https://streetsservices.co.uk/pictures/icon.png">
-    <meta property="og:url" content="https://streetsservices.co.uk/pages/price-tb.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
     <title>Price per TB Calculator - Streets Services</title>
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <link rel="canonical" href="https://streetsservices.co.uk/pages/price-tb.html">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Price per TB Calculator</h1>
-        </div>
-        <p class="tagline">Compare Storage Drive Values</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a> <span class="sep">/</span> price-tb
+    </nav>
+    <header class="page-header">
+        <p class="page-eyebrow">Calculators</p>
+        <h1>Price per TB Calculator</h1>
+        <p>Compare storage drive values — find out which drive gives the best cost per terabyte.</p>
     </header>
-
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('calculator-content')">
-                <h2>Calculator</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+    <main id="main" class="content">
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Calculator</h2>
+                <span class="block-line"></span>
             </div>
-            <div id="calculator-content" class="section-content active">
-                <div class="calculator-container">
-                    <form class="calculator-form" onsubmit="return false;" aria-label="Price per TB calculator">
-                        <div class="form-group">
-                            <label for="price">💷 Price of Drive (£)</label>
-                            <input type="number" id="price" name="price" placeholder="e.g., 149.99" step="0.01" min="0" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="size">💾 Size of Drive (TB)</label>
-                            <input type="number" id="size" name="size" placeholder="e.g., 4" step="0.01" min="0.01" required aria-required="true">
-                        </div>
-                        <button type="button" class="calculate-button" onclick="calculatePricePerTB()">Calculate Price per TB</button>
-                    </form>
-                    <div id="result" class="result-box" role="status" aria-live="polite">
-                        <div><div class="result-text">Enter values to calculate</div></div>
+            <div class="calculator-container">
+                <form class="calculator-form" onsubmit="return false;" aria-label="Price per TB calculator">
+                    <div class="form-group">
+                        <label for="price">Price of Drive (£)</label>
+                        <input type="number" id="price" placeholder="e.g., 149.99" step="0.01" min="0">
                     </div>
+                    <div class="form-group">
+                        <label for="size">Size of Drive (TB)</label>
+                        <input type="number" id="size" placeholder="e.g., 4" step="0.01" min="0.01">
+                    </div>
+                    <button type="button" class="calculate-button" onclick="calculatePricePerTB()">Calculate Price per TB</button>
+                </form>
+                <div id="result" class="result-box" role="status" aria-live="polite">
+                    <div><div class="result-text">Enter values to calculate</div></div>
                 </div>
             </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('info-content')">
-                <h2>How to Use</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+        </div>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">02</span>
+                <h2 class="block-title">How It Works</h2>
+                <span class="block-line"></span>
             </div>
-            <div id="info-content" class="section-content active">
-                <div class="info-cards">
-                    <article class="info-card">
-                        <h3>📊 Why Calculate Price per TB?</h3>
-                        <p>Comparing storage drives can be tricky when they come in different sizes and prices. This calculator helps determine cost-effectiveness by calculating the price per terabyte, making it easy to compare different drives side-by-side.</p>
-                    </article>
-                    <article class="info-card">
-                        <h3>🎯 How to Use</h3>
-                        <p>Simply enter the total price of the drive and its storage capacity in terabytes. The calculator will instantly show you the cost per TB and a value rating to help make informed purchasing decisions.</p>
-                    </article>
-                    <article class="info-card">
-                        <h3>💡 Pro Tip</h3>
-                        <p>Generally, larger drives offer better value per TB. However, consider your actual storage needs — buying more capacity than you need might not be economical if you won't use it within the drive's lifespan.</p>
-                    </article>
-                    <article class="info-card">
-                        <h3>🔍 What to Look For</h3>
-                        <p>A lower price per TB indicates better value. However, also consider drive speed (RPM for HDDs, read/write speeds for SSDs), warranty period, and brand reliability when making your final decision.</p>
-                    </article>
-                </div>
+            <div class="info-cards">
+                <article class="info-card"><h3>Why Calculate Price per TB?</h3><p>Comparing storage drives can be tricky when they come in different sizes and prices. This calculator helps determine cost-effectiveness by calculating the price per terabyte, making it easy to compare drives side-by-side.</p></article>
+                <article class="info-card"><h3>How to Use</h3><p>Simply enter the total price of the drive and its storage capacity in terabytes. The calculator will instantly show you the cost per TB and a value rating to help make informed purchasing decisions.</p></article>
+                <article class="info-card"><h3>Pro Tip</h3><p>Generally, larger drives offer better value per TB. However, consider your actual storage needs — buying more capacity than you need might not be economical if you won't use it within the drive's lifespan.</p></article>
+                <article class="info-card"><h3>What to Look For</h3><p>A lower price per TB indicates better value. Also consider drive speed (RPM for HDDs, read/write speeds for SSDs), warranty period, and brand reliability when making your final decision.</p></article>
             </div>
-        </section>
+        </div>
     </main>
-
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">&larr; Back to Home</a>
     </footer>
-
     <script src="../app.js"></script>
+    <script>
+        ['price','size'].forEach(id=>{
+            const el=document.getElementById(id);
+            if(el) el.addEventListener('keypress',e=>{if(e.key==='Enter')calculatePricePerTB();});
+        });
+    </script>
 </body>
 </html>

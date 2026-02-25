@@ -14,62 +14,78 @@
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .search-input { width:100%;padding:1rem 1.5rem;font-size:1.1rem;border:2px solid var(--border-color);border-radius:var(--radius-lg);background:var(--bg-card);color:var(--text-primary);transition:all var(--transition-base); }
-        .search-input:focus { outline:none;border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(59,130,246,0.1); }
-        .search-input::placeholder { color:var(--text-secondary); }
-        .alpha-bar { display:flex;gap:0.3rem;flex-wrap:wrap;margin:1rem 0; }
-        .alpha-btn { background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-secondary);padding:0.35rem 0.6rem;border-radius:var(--radius-sm);cursor:pointer;font-weight:700;font-size:0.85rem;transition:all var(--transition-base);min-width:36px;text-align:center; }
-        .alpha-btn:hover,.alpha-btn.active { background:var(--primary-color);border-color:var(--primary-color);color:white; }
-        .alpha-group { margin-bottom:2rem; }
-        .alpha-header { font-size:2rem;font-weight:700;color:var(--primary-color);border-bottom:2px solid var(--primary-color);margin-bottom:1rem;padding-bottom:0.25rem; }
-        .term-card { background:var(--bg-dark);border-left:4px solid var(--border-color);padding:1rem 1.25rem;margin-bottom:0.75rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;transition:border-left-color var(--transition-base); }
-        .term-card:hover { border-left-color:var(--primary-color); }
-        .term-card.hidden { display:none; }
-        .term-name { color:var(--accent-color);font-weight:700;font-size:1.05rem;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.75rem; }
-        .term-abbr { background:var(--primary-color);color:white;padding:0.1rem 0.5rem;border-radius:20px;font-size:0.75rem;font-weight:600; }
-        .term-cat { background:var(--bg-hover);color:var(--text-secondary);padding:0.1rem 0.5rem;border-radius:20px;font-size:0.75rem; }
-        .term-def { color:var(--text-secondary);line-height:1.7; }
-        .no-results { text-align:center;padding:3rem;color:var(--text-secondary);display:none; }
-        .no-results.show { display:block; }
-        .stats-bar { display:flex;gap:2rem;justify-content:center;margin-bottom:1rem;flex-wrap:wrap; }
-        .stat-pill { background:var(--bg-dark);padding:0.4rem 1rem;border-radius:20px;color:var(--text-secondary);font-size:0.875rem; }
-        .stat-pill span { color:var(--accent-color);font-weight:700; }
-        mark { background:rgba(59,130,246,0.3);color:var(--accent-color);border-radius:3px;padding:0 2px; }
+        .search-bar{width:100%;padding:10px 16px;background:var(--bg);color:var(--text);border:1px solid var(--border);font-family:var(--font-mono);font-size:13px;outline:none;transition:border-color .2s;margin-bottom:12px;}
+        .search-bar:focus{border-color:var(--accent);}
+        .search-bar::placeholder{color:var(--text-dim);}
+        .alpha-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
+        .alpha-btn{padding:4px 10px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;min-width:34px;text-align:center;}
+        .alpha-btn:hover,.alpha-btn.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
+        .alpha-group{margin-bottom:2rem;}
+        .alpha-header{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:12px;letter-spacing:-0.5px;}
+        .term-card{padding:16px;border-bottom:1px solid rgba(39,39,39,0.5);transition:background .15s;}
+        .term-card:hover{background:var(--bg-hover);}
+        .term-name{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;font-size:14px;color:var(--text);}
+        .term-abbr{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border:1px solid var(--accent);color:var(--accent);}
+        .term-cat{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border:1px solid var(--border);color:var(--text-muted);}
+        .term-def{font-size:12px;color:var(--text-muted);line-height:1.75;}
+        mark{background:rgba(0,229,204,0.2);color:var(--accent);}
+        .stats-row{display:flex;gap:24px;margin-bottom:12px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+        .stats-row span{color:var(--accent);}
+        .no-results{text-align:center;padding:3rem;color:var(--text-muted);font-family:var(--font-mono);font-size:12px;display:none;}
+        .no-results.show{display:block;}
     </style>
     <link rel="canonical" href="https://streetsservices.co.uk/pages/it-glossary.html">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>IT Glossary</h1>
-        </div>
-        <p class="tagline">Plain-English IT &amp; Technology Definitions</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html" class="active" aria-current="page">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>it-glossary</span>
+    </nav>
+
+    <header class="page-header">
+        <p class="page-eyebrow">Reference</p>
+        <h1>IT Glossary</h1>
+        <p>Plain-English definitions for common IT and technology terms.</p>
     </header>
 
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
+    <main id="main" class="content">
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('glossary-content')">
-                <h2>Glossary</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Glossary</h2>
+                <span class="block-line" aria-hidden="true"></span>
             </div>
-            <div id="glossary-content" class="section-content active">
-                <div class="stats-bar">
-                    <div class="stat-pill">Terms: <span id="total-count">0</span></div>
-                    <div class="stat-pill">Showing: <span id="show-count">0</span></div>
-                </div>
-                <input type="text" id="search" class="search-input" placeholder="🔍 Search terms, abbreviations, or definitions..." oninput="doSearch(this.value)">
-                <div class="alpha-bar" id="alpha-bar"></div>
-                <div id="glossary-body"></div>
-                <div id="no-results" class="no-results"><p style="font-size:3rem;">🔍</p><p>No terms found. Try a different search.</p></div>
+
+            <div class="stats-row">
+                Terms: <span id="total-count">0</span> &nbsp;|&nbsp; Showing: <span id="show-count">0</span>
             </div>
-        </section>
+
+            <input type="text" id="search" class="search-bar" placeholder="Search terms, abbreviations, or definitions..." oninput="doSearch(this.value)" aria-label="Search glossary">
+            <div class="alpha-bar" id="alpha-bar" role="group" aria-label="Filter by letter"></div>
+            <div id="glossary-body"></div>
+            <div id="no-results" class="no-results">🔍 No terms found. Try a different search.</div>
+        </div>
+
     </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">← Back to Home</a>
     </footer>
 
     <script src="../app.js"></script>
@@ -82,73 +98,66 @@
         { name:'BitLocker', abbr:'', cat:'Security', def:'Microsoft\'s built-in disk encryption feature in Windows. Encrypts entire volumes to protect data if a device is lost or stolen. Requires a TPM chip for full functionality.' },
         { name:'Bluetooth', abbr:'BT', cat:'Wireless', def:'Short-range wireless technology standard for exchanging data between devices. Operates at 2.4 GHz and supports various profiles for audio, file transfer, input devices, and more.' },
         { name:'Cache', abbr:'', cat:'General', def:'Temporary storage that stores frequently accessed data for faster retrieval. Exists at multiple levels — CPU cache, browser cache, disk cache — all designed to reduce latency.' },
-        { name:'Cloud Computing', abbr:'', cat:'General', def:'Delivery of computing services — servers, storage, databases, networking, software — over the internet ("the cloud") on a pay-as-you-use basis from providers like AWS, Azure, and Google Cloud.' },
-        { name:'CIDR', abbr:'CIDR', cat:'Networking', def:'Classless Inter-Domain Routing. A method for allocating IP addresses and routing using variable-length subnet masking (VLSM). Notation uses a slash and prefix length, e.g., 192.168.1.0/24.' },
-        { name:'Command Line Interface', abbr:'CLI', cat:'General', def:'A text-based interface where users type commands to interact with the operating system or application. Examples include Windows CMD, PowerShell, and the macOS/Linux Terminal.' },
+        { name:'Cloud Computing', abbr:'', cat:'General', def:'Delivery of computing services — servers, storage, databases, networking, software — over the internet on a pay-as-you-use basis from providers like AWS, Azure, and Google Cloud.' },
+        { name:'CIDR', abbr:'CIDR', cat:'Networking', def:'Classless Inter-Domain Routing. A method for allocating IP addresses using variable-length subnet masking. Notation uses a slash and prefix length, e.g., 192.168.1.0/24.' },
+        { name:'CLI', abbr:'CLI', cat:'General', def:'Command Line Interface. A text-based interface where users type commands to interact with the OS or application. Examples: Windows CMD, PowerShell, macOS/Linux Terminal.' },
         { name:'Container', abbr:'', cat:'DevOps', def:'A lightweight, portable unit that packages an application and its dependencies together. Unlike VMs, containers share the host OS kernel. Docker is the most popular containerisation platform.' },
-        { name:'CPU', abbr:'CPU', cat:'Hardware', def:'Central Processing Unit — the primary component of a computer that executes instructions. Measured by core count, clock speed (GHz), and architecture. Modern CPUs contain multiple cores for parallel processing.' },
+        { name:'CPU', abbr:'CPU', cat:'Hardware', def:'Central Processing Unit — the primary component that executes instructions. Measured by core count, clock speed (GHz), and architecture. Modern CPUs contain multiple cores for parallel processing.' },
         { name:'DHCP', abbr:'DHCP', cat:'Networking', def:'Dynamic Host Configuration Protocol. Automatically assigns IP addresses, subnet masks, gateways, and DNS servers to devices on a network, eliminating manual configuration.' },
         { name:'DNS', abbr:'DNS', cat:'Networking', def:'Domain Name System. Translates human-readable domain names (e.g., google.com) into IP addresses. Often called the "phone book of the internet." Common DNS servers: 8.8.8.8 (Google), 1.1.1.1 (Cloudflare).' },
-        { name:'Docker', abbr:'', cat:'DevOps', def:'An open-source platform for developing, shipping, and running applications in containers. Allows developers to package applications with all dependencies into standardised units.' },
-        { name:'Domain Controller', abbr:'DC', cat:'Windows', def:'A server that responds to security authentication requests in a Windows Server domain. It stores a copy of the Active Directory database and handles all authentication and authorisation.' },
-        { name:'Encryption', abbr:'', cat:'Security', def:'The process of encoding data so only authorised parties can read it. Uses mathematical algorithms and keys. Common standards include AES-256, RSA, and TLS for network communications.' },
-        { name:'Ethernet', abbr:'', cat:'Networking', def:'The most widely used wired networking technology. Defined by IEEE 802.3. Common speeds: 100 Mbps (Fast Ethernet), 1 Gbps (GbE), 10 Gbps (10GbE). Uses RJ-45 connectors and Cat5e/Cat6/Cat6a cables.' },
-        { name:'Firewall', abbr:'', cat:'Security', def:'A network security system that monitors and controls incoming and outgoing network traffic based on predefined security rules. Can be hardware, software, or a combination of both.' },
-        { name:'FTP', abbr:'FTP', cat:'Networking', def:'File Transfer Protocol. A standard network protocol for transferring files between client and server over TCP/IP. Insecure by default — SFTP (over SSH) or FTPS (over TLS) should be used instead.' },
-        { name:'GPU', abbr:'GPU', cat:'Hardware', def:'Graphics Processing Unit. Originally designed for rendering graphics, GPUs are now used for parallel computation tasks including AI/ML, video encoding, and scientific simulations.' },
-        { name:'Group Policy', abbr:'GPO', cat:'Windows', def:'A feature of Windows that provides centralised management and configuration of operating systems, applications, and user settings in an Active Directory environment.' },
+        { name:'Docker', abbr:'', cat:'DevOps', def:'An open-source platform for developing, shipping, and running applications in containers. Uses images and containers to ensure consistent environments across development, testing, and production.' },
+        { name:'Domain Controller', abbr:'DC', cat:'Windows', def:'A server running Active Directory Domain Services (AD DS) that authenticates and authorises users and computers in a Windows domain network.' },
+        { name:'Firewall', abbr:'', cat:'Security', def:'A network security device or software that monitors and controls incoming and outgoing network traffic based on predefined security rules. Can be hardware-based (e.g., Fortigate) or software-based (e.g., Windows Defender Firewall).' },
+        { name:'Gateway', abbr:'', cat:'Networking', def:'A network node that connects two networks using different protocols or architectures. In home/office networks, the gateway is typically your router, connecting the local network to the internet.' },
+        { name:'Git', abbr:'', cat:'DevOps', def:'A distributed version control system for tracking changes in source code. Allows multiple developers to work on the same codebase. GitHub, GitLab, and Bitbucket are popular hosting platforms.' },
+        { name:'Group Policy', abbr:'GPO', cat:'Windows', def:'A feature in Windows Server Active Directory that allows centralised management of settings for users and computers across a domain. GPOs control everything from password policies to desktop configurations.' },
         { name:'HTTP', abbr:'HTTP', cat:'Web', def:'Hypertext Transfer Protocol. The foundation of data communication on the web. HTTP/2 and HTTP/3 offer significant performance improvements over the original HTTP/1.1.' },
-        { name:'HTTPS', abbr:'HTTPS', cat:'Web', def:'HTTP Secure. Extends HTTP with TLS/SSL encryption. Authenticates the server, ensures data integrity, and encrypts all communication. Essential for any website handling sensitive data.' },
-        { name:'Hypervisor', abbr:'', cat:'Virtualisation', def:'Software that creates and manages virtual machines. Type 1 (bare-metal) hypervisors run directly on hardware (VMware ESXi, Hyper-V). Type 2 hypervisors run on a host OS (VirtualBox, VMware Workstation).' },
-        { name:'Hyper-V', abbr:'', cat:'Virtualisation', def:'Microsoft\'s native Type-1 hypervisor built into Windows Server and Windows 10/11 Pro. Provides hardware virtualisation enabling multiple virtual machines to run on a single physical host.' },
+        { name:'HTTPS', abbr:'HTTPS', cat:'Web', def:'HTTP Secure. Extends HTTP with TLS/SSL encryption. Authenticates the server, ensures data integrity, and encrypts all communication. Essential for any site handling sensitive data.' },
+        { name:'Hypervisor', abbr:'', cat:'Virtualisation', def:'Software that creates and manages virtual machines. Type 1 (bare-metal) hypervisors run directly on hardware (VMware ESXi, Hyper-V). Type 2 run on a host OS (VirtualBox, VMware Workstation).' },
+        { name:'Hyper-V', abbr:'', cat:'Virtualisation', def:'Microsoft\'s native Type-1 hypervisor built into Windows Server and Windows 10/11 Pro. Provides hardware virtualisation enabling multiple VMs to run on a single physical host.' },
         { name:'IMAP', abbr:'IMAP', cat:'Email', def:'Internet Message Access Protocol. Allows email clients to access messages on a mail server. Unlike POP3, IMAP synchronises email across multiple devices and keeps messages on the server.' },
-        { name:'IP Address', abbr:'IP', cat:'Networking', def:'Internet Protocol address — a unique numerical label assigned to each device on a network. IPv4 uses 32-bit addresses (e.g., 192.168.1.1). IPv6 uses 128-bit addresses to overcome IPv4 exhaustion.' },
+        { name:'IP Address', abbr:'IP', cat:'Networking', def:'A unique numerical label assigned to each device on a network. IPv4 uses 32-bit addresses (e.g., 192.168.1.1). IPv6 uses 128-bit addresses to overcome IPv4 exhaustion.' },
         { name:'Kubernetes', abbr:'K8s', cat:'DevOps', def:'An open-source container orchestration system for automating deployment, scaling, and management of containerised applications. Originally designed by Google, now maintained by CNCF.' },
         { name:'LAN', abbr:'LAN', cat:'Networking', def:'Local Area Network. A network that connects devices within a limited area such as a home, office, or building. Typically operates at high speeds (1 Gbps+) over Ethernet or Wi-Fi.' },
-        { name:'LDAP', abbr:'LDAP', cat:'Networking', def:'Lightweight Directory Access Protocol. A protocol for accessing and maintaining distributed directory information over a network. Used by Active Directory for authentication queries.' },
+        { name:'LDAP', abbr:'LDAP', cat:'Networking', def:'Lightweight Directory Access Protocol. A protocol for accessing and maintaining distributed directory information. Used by Active Directory for authentication queries.' },
         { name:'MAC Address', abbr:'MAC', cat:'Networking', def:'Media Access Control address — a unique hardware identifier assigned to a network interface. Written as 6 pairs of hex digits (e.g., 00:1A:2B:3C:4D:5E). The first 3 bytes identify the manufacturer (OUI).' },
         { name:'Malware', abbr:'', cat:'Security', def:'Malicious software designed to disrupt, damage, or gain unauthorised access to systems. Types include viruses, worms, ransomware, spyware, and trojans.' },
         { name:'MFA', abbr:'MFA', cat:'Security', def:'Multi-Factor Authentication. Requires users to verify identity using two or more factors: something you know (password), something you have (phone/token), or something you are (biometrics).' },
-        { name:'NAT', abbr:'NAT', cat:'Networking', def:'Network Address Translation. Maps private IP addresses on a local network to a public IP address for internet communication. Allows multiple devices to share one public IP address.' },
-        { name:'NAS', abbr:'NAS', cat:'Storage', def:'Network Attached Storage. A file-level data storage device connected to a network, providing shared storage to authorised clients. Popular brands include QNAP, Synology, and Western Digital.' },
-        { name:'NTFS', abbr:'NTFS', cat:'Windows', def:'New Technology File System. The primary file system used by Windows. Supports large file sizes, file permissions, encryption (EFS), journaling, and compression.' },
-        { name:'OSI Model', abbr:'OSI', cat:'Networking', def:'Open Systems Interconnection model. A conceptual framework describing how different network protocols communicate in 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application.' },
-        { name:'Patch', abbr:'', cat:'General', def:'A software update that fixes vulnerabilities, bugs, or improves functionality. Regular patching is one of the most effective cybersecurity measures. Windows patches are released on "Patch Tuesday" monthly.' },
-        { name:'Ping', abbr:'', cat:'Networking', def:'A network utility that tests the reachability of a host and measures round-trip time for messages using ICMP echo requests. Used to diagnose network connectivity issues.' },
-        { name:'Port', abbr:'', cat:'Networking', def:'A logical endpoint for network communication. Each service listens on a specific port number (0–65535). Well-known ports: HTTP (80), HTTPS (443), SSH (22), RDP (3389), DNS (53).' },
-        { name:'PowerShell', abbr:'PS', cat:'Windows', def:'Microsoft\'s task automation framework and scripting language. Combines a command-line shell with a scripting language built on .NET. Essential for Windows system administration.' },
-        { name:'Proxmox', abbr:'', cat:'Virtualisation', def:'An open-source server virtualisation platform based on Debian Linux. Integrates KVM hypervisor for VMs, LXC for containers, and includes a web-based management interface.' },
+        { name:'NAT', abbr:'NAT', cat:'Networking', def:'Network Address Translation. Translates private IP addresses to a public IP address (and vice versa). Allows multiple devices on a private network to share a single public IP address.' },
+        { name:'NFS', abbr:'NFS', cat:'Storage', def:'Network File System. A distributed file system protocol allowing a client to access files over a network as if they were local. Widely used in Linux/Unix environments.' },
+        { name:'NTP', abbr:'NTP', cat:'Networking', def:'Network Time Protocol. Synchronises clocks across computer systems over a network to within a few milliseconds of Coordinated Universal Time (UTC).' },
+        { name:'NTFS', abbr:'NTFS', cat:'Storage', def:'New Technology File System. The default file system for Windows. Supports file permissions, encryption, compression, journaling, and large file/partition sizes.' },
+        { name:'PowerShell', abbr:'PS', cat:'Windows', def:'Microsoft\'s powerful shell and scripting language built on .NET. Essential for Windows system administration, automation, and DevOps workflows.' },
+        { name:'Proxmox', abbr:'', cat:'Virtualisation', def:'An open-source server virtualisation platform based on Debian Linux. Integrates KVM for VMs and LXC for containers, with a web-based management interface.' },
         { name:'RAID', abbr:'RAID', cat:'Storage', def:'Redundant Array of Independent Disks. Combines multiple drives for redundancy or performance. RAID 0 (striping), RAID 1 (mirroring), RAID 5 (striping with parity), RAID 10 (mirrored stripes).' },
         { name:'RAM', abbr:'RAM', cat:'Hardware', def:'Random Access Memory. Volatile memory that stores data currently in use by the CPU. More RAM allows more applications to run simultaneously. Modern systems use DDR4 or DDR5.' },
-        { name:'RDP', abbr:'RDP', cat:'Remote Access', def:'Remote Desktop Protocol. A proprietary Microsoft protocol allowing users to access and control a Windows computer remotely. Operates on port 3389. Should be behind a VPN or secured with Network Level Authentication.' },
-        { name:'Ransomware', abbr:'', cat:'Security', def:'Malware that encrypts a victim\'s files and demands payment for the decryption key. Typically spreads via phishing emails or unpatched vulnerabilities. Regular backups are the best defence.' },
-        { name:'SAN', abbr:'SAN', cat:'Storage', def:'Storage Area Network. A dedicated high-speed network providing block-level storage access. Used in enterprise environments for high-performance storage. Typically uses Fibre Channel or iSCSI.' },
-        { name:'SFTP', abbr:'SFTP', cat:'Networking', def:'SSH File Transfer Protocol. A secure alternative to FTP that uses SSH encryption. Operates over port 22. Not related to FTPS — SFTP is a completely different protocol.' },
+        { name:'RDP', abbr:'RDP', cat:'Remote Access', def:'Remote Desktop Protocol. A proprietary Microsoft protocol allowing remote access to a Windows computer. Operates on port 3389. Should be secured behind a VPN or Network Level Authentication.' },
+        { name:'Ransomware', abbr:'', cat:'Security', def:'Malware that encrypts a victim\'s files and demands payment for the decryption key. Spreads via phishing emails or unpatched vulnerabilities. Regular backups are the best defence.' },
+        { name:'SAN', abbr:'SAN', cat:'Storage', def:'Storage Area Network. A dedicated high-speed network providing block-level storage access. Used in enterprise environments. Typically uses Fibre Channel or iSCSI.' },
+        { name:'SFTP', abbr:'SFTP', cat:'Networking', def:'SSH File Transfer Protocol. A secure alternative to FTP using SSH encryption. Operates over port 22. Not related to FTPS — it is a completely different protocol.' },
         { name:'SMB', abbr:'SMB', cat:'Networking', def:'Server Message Block. A network file sharing protocol used by Windows for accessing shared files, printers, and other resources. Operates on port 445. Used by Windows file shares and Samba on Linux.' },
         { name:'SMTP', abbr:'SMTP', cat:'Email', def:'Simple Mail Transfer Protocol. The standard protocol for sending email between servers. Operates on ports 25, 465 (SSL), and 587 (STARTTLS). Receiving uses IMAP or POP3.' },
         { name:'SNMP', abbr:'SNMP', cat:'Networking', def:'Simple Network Management Protocol. Used for monitoring and managing network devices. Agents on managed devices report to a central management system (NMS). SNMP v3 adds encryption and authentication.' },
         { name:'SSH', abbr:'SSH', cat:'Remote Access', def:'Secure Shell. A cryptographic network protocol for secure remote login and command execution. Operates on port 22. Replaced insecure Telnet. Key-based authentication is more secure than passwords.' },
-        { name:'SSL/TLS', abbr:'TLS', cat:'Security', def:'Transport Layer Security (and its predecessor SSL). Cryptographic protocols that provide secure communications over networks. TLS 1.3 is the current standard. Used to secure HTTPS, email, and VPNs.' },
-        { name:'Subnet Mask', abbr:'', cat:'Networking', def:'A 32-bit number that divides an IP address into network and host portions. Written as four octets (e.g., 255.255.255.0) or CIDR notation (/24). Determines which devices are on the same local network.' },
-        { name:'SSD', abbr:'SSD', cat:'Hardware', def:'Solid State Drive. Uses flash memory instead of spinning platters. Dramatically faster than HDDs with read/write speeds of 500+ MB/s (SATA) or 3,000–7,000 MB/s (NVMe). No moving parts means greater durability.' },
-        { name:'TCP', abbr:'TCP', cat:'Networking', def:'Transmission Control Protocol. A connection-oriented protocol that ensures reliable, ordered delivery of data. Uses a three-way handshake (SYN, SYN-ACK, ACK). Used by HTTP, HTTPS, SMTP, SSH, and most applications.' },
-        { name:'UDP', abbr:'UDP', cat:'Networking', def:'User Datagram Protocol. A connectionless protocol with no delivery guarantees. Faster than TCP but unreliable. Used where speed matters more than reliability: DNS, VoIP, video streaming, online gaming.' },
-        { name:'UEFI', abbr:'UEFI', cat:'Hardware', def:'Unified Extensible Firmware Interface. The modern replacement for BIOS. Supports drives larger than 2 TB via GPT, faster boot times, Secure Boot to prevent bootkit malware, and a graphical interface.' },
-        { name:'VLAN', abbr:'VLAN', cat:'Networking', def:'Virtual Local Area Network. Logically segments a physical network into separate broadcast domains. Improves security, performance, and management. Configured on managed switches using 802.1Q tagging.' },
-        { name:'VM', abbr:'VM', cat:'Virtualisation', def:'Virtual Machine. A software emulation of a physical computer. Multiple VMs can run on a single physical host, each with its own OS and resources. Managed by a hypervisor.' },
-        { name:'VPN', abbr:'VPN', cat:'Security', def:'Virtual Private Network. Creates an encrypted tunnel over a public network, allowing secure remote access or connecting networks. Common protocols: OpenVPN, WireGuard, L2TP/IPsec, SSL VPN.' },
+        { name:'SSL/TLS', abbr:'TLS', cat:'Security', def:'Transport Layer Security (and its predecessor SSL). Cryptographic protocols that provide secure communication over a network. TLS 1.3 is the current standard. Used by HTTPS, SMTPS, IMAPS, and more.' },
+        { name:'Subnet Mask', abbr:'', cat:'Networking', def:'A 32-bit number that divides an IP address into network and host portions. Written in dotted decimal (e.g., 255.255.255.0) or CIDR notation (/24). Determines which devices are on the same local network.' },
+        { name:'Switch', abbr:'', cat:'Networking', def:'A network device that connects multiple devices on a LAN and uses MAC addresses to forward data to the correct destination port. Managed switches offer VLANs, QoS, and port mirroring.' },
+        { name:'UEFI', abbr:'UEFI', cat:'Hardware', def:'Unified Extensible Firmware Interface. The modern replacement for BIOS. Supports larger drives (>2TB), faster boot times, Secure Boot, and a graphical pre-boot interface.' },
+        { name:'VLAN', abbr:'VLAN', cat:'Networking', def:'Virtual Local Area Network. Logically segments a physical network into multiple isolated broadcast domains. Improves security and performance by separating traffic types (e.g., management, guest, IoT).' },
+        { name:'VM', abbr:'VM', cat:'Virtualisation', def:'Virtual Machine. A software emulation of a physical computer running on a host machine. Multiple VMs can run on a single host, each with its own OS and resources, managed by a hypervisor.' },
+        { name:'VPN', abbr:'VPN', cat:'Security', def:'Virtual Private Network. Creates an encrypted tunnel over a public network for secure remote access. Common protocols: OpenVPN, WireGuard, L2TP/IPsec, SSL VPN.' },
         { name:'Veeam', abbr:'', cat:'Backup', def:'A leading backup, recovery, and data management solution for virtual, physical, and cloud workloads. Widely used with VMware vSphere and Microsoft Hyper-V environments.' },
         { name:'WAN', abbr:'WAN', cat:'Networking', def:'Wide Area Network. Connects LANs across large geographic distances. The internet is the world\'s largest WAN. Organisations also use private WANs via MPLS, leased lines, or SD-WAN.' },
-        { name:'Wi-Fi', abbr:'', cat:'Wireless', def:'Wireless networking technology based on the IEEE 802.11 standard. Generations include 802.11ac (Wi-Fi 5), 802.11ax (Wi-Fi 6/6E), and 802.11be (Wi-Fi 7). Operates on 2.4 GHz, 5 GHz, and 6 GHz bands.' },
-        { name:'Zero-Day', abbr:'0-day', cat:'Security', def:'A vulnerability in software that is unknown to the vendor or for which no patch exists. Called "zero-day" because developers have had zero days to fix it. Extremely valuable on the exploit market.' },
-        { name:'Zero Trust', abbr:'ZT', cat:'Security', def:'A security model based on the principle "never trust, always verify." No user, device, or network segment is trusted by default — all access requests must be authenticated, authorised, and continuously validated.' },
+        { name:'Wi-Fi', abbr:'', cat:'Wireless', def:'Wireless networking technology based on IEEE 802.11. Generations include 802.11ac (Wi-Fi 5), 802.11ax (Wi-Fi 6/6E), 802.11be (Wi-Fi 7). Operates on 2.4 GHz, 5 GHz, and 6 GHz bands.' },
+        { name:'Zero-Day', abbr:'0-day', cat:'Security', def:'A vulnerability in software unknown to the vendor or without an available patch. Called "zero-day" because developers have had zero days to fix it.' },
+        { name:'Zero Trust', abbr:'ZT', cat:'Security', def:'A security model based on "never trust, always verify." No user, device, or network is trusted by default — all access requests must be authenticated, authorised, and continuously validated.' },
     ];
 
         let currentLetter = 'ALL';
         let currentQuery  = '';
 
         function build() {
-            const bar = document.getElementById('alpha-bar');
+            const bar     = document.getElementById('alpha-bar');
             const letters = ['ALL', ...new Set(TERMS.map(t => t.name[0].toUpperCase()).sort())];
             bar.innerHTML = letters.map(l =>
                 `<button class="alpha-btn${l === 'ALL' ? ' active' : ''}" onclick="filterAlpha('${l}', this)">${l}</button>`
@@ -171,7 +180,7 @@
         }
 
         function render() {
-            const body = document.getElementById('glossary-body');
+            const body     = document.getElementById('glossary-body');
             const filtered = TERMS.filter(t => {
                 const matchLetter = currentLetter === 'ALL' || t.name[0].toUpperCase() === currentLetter;
                 const matchQ = !currentQuery || t.name.toLowerCase().includes(currentQuery) || (t.abbr && t.abbr.toLowerCase().includes(currentQuery)) || t.def.toLowerCase().includes(currentQuery);
@@ -182,7 +191,6 @@
             document.getElementById('show-count').textContent  = filtered.length;
             document.getElementById('no-results').classList.toggle('show', filtered.length === 0);
 
-            // Group by first letter
             const groups = {};
             filtered.forEach(t => {
                 const l = t.name[0].toUpperCase();

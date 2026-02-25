@@ -14,188 +14,202 @@
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .results-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0; }
-        .result-pill { padding:1.5rem;border-radius:var(--radius-md);text-align:center; }
-        .result-pill.primary { background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));color:white; }
-        .result-pill.secondary { background:var(--bg-dark);border:2px solid var(--border-color);color:var(--text-primary); }
-        .result-pill.danger { background:linear-gradient(135deg,#ef4444,#dc2626);color:white; }
-        .result-pill .amount { font-size:2rem;font-weight:700;font-family:'Courier New',monospace;margin-bottom:0.25rem; }
-        .result-pill .pill-label { font-size:0.85rem;opacity:0.85; }
-        .amort-table { width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.875rem; }
-        .amort-table th { background:var(--bg-hover);color:var(--accent-color);padding:0.75rem 1rem;text-align:right; }
-        .amort-table th:first-child { text-align:left; }
-        .amort-table td { padding:0.5rem 1rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary);text-align:right;font-family:'Courier New',monospace; }
-        .amort-table td:first-child { text-align:left; }
-        .amort-table tr:hover td { background:var(--bg-hover);color:var(--text-primary); }
-        .amort-wrapper { max-height:400px;overflow-y:auto;border:1px solid var(--border-color);border-radius:var(--radius-sm); }
-        .preset-grid { display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem; }
-        .preset-btn { background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-secondary);padding:0.5rem 1rem;border-radius:20px;cursor:pointer;transition:all var(--transition-base);font-weight:500; }
-        .preset-btn:hover { border-color:var(--primary-color);color:var(--accent-color); }
-        .bar-wrap { background:var(--bg-dark);border-radius:var(--radius-sm);height:20px;margin-top:0.5rem;overflow:hidden;display:flex; }
-        .bar-principal { background:var(--primary-color);height:100%;transition:width 0.5s ease; }
-        .bar-interest { background:#ef4444;height:100%;transition:width 0.5s ease; }
+        .form-field{margin-bottom:16px;}
+        .form-field label{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:.8;margin-bottom:6px;}
+        .form-field input{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--font-mono);font-size:13px;outline:none;transition:border-color .2s;}
+        .form-field input:focus{border-color:var(--accent);}
+        .form-field input::placeholder{color:var(--text-dim);}
+        .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:20px 0;}
+        .result-pill{background:var(--bg-card);padding:20px;text-align:center;}
+        .result-pill .amount{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+        .result-pill .amount.danger{color:#ef4444;}
+        .result-pill .amount.neutral{color:var(--text);}
+        .result-pill .pill-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);}
+        .bar-wrap{height:8px;background:var(--border);display:flex;margin:8px 0;}
+        .bar-principal{background:var(--accent);height:100%;transition:width .5s;}
+        .bar-interest{background:#ef4444;height:100%;transition:width .5s;}
+        .amort-table{width:100%;border-collapse:collapse;font-size:12px;}
+        .amort-table th{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);padding:10px 14px;border-bottom:1px solid var(--border);text-align:right;}
+        .amort-table th:first-child{text-align:left;}
+        .amort-table td{padding:8px 14px;border-bottom:1px solid rgba(39,39,39,.4);color:var(--text-muted);text-align:right;font-family:var(--font-mono);}
+        .amort-table td:first-child{text-align:left;color:var(--text);}
+        .amort-table tr:hover td{background:var(--bg-hover);}
+        .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+        .preset-btn{padding:4px 14px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;transition:border-color .2s,color .2s;}
+        .preset-btn:hover{border-color:var(--accent);color:var(--accent);}
+        .btn-primary{padding:12px 24px;background:transparent;border:1px solid var(--accent);color:var(--accent);font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;width:100%;margin-top:4px;}
+        .btn-primary:hover{background:var(--accent);color:#0e0e0e;}
     </style>
     <link rel="canonical" href="https://streetsservices.co.uk/pages/loan-calculator.html">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Loan Calculator</h1>
-        </div>
-        <p class="tagline">Calculate Payments &amp; Total Interest</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>loan-calculator</span>
+    </nav>
+
+    <header class="page-header">
+        <p class="page-eyebrow">Calculators</p>
+        <h1>Loan Calculator</h1>
+        <p>Calculate monthly repayments, total interest, and see a full amortisation schedule.</p>
     </header>
 
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
+    <main id="main" class="content">
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('calc-content')">
-                <h2>Calculator</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Loan Details</h2>
+                <span class="block-line" aria-hidden="true"></span>
             </div>
-            <div id="calc-content" class="section-content active">
-                <div class="calculator-container" style="max-width:700px;">
-                    <div class="preset-grid">
-                        <button class="preset-btn" onclick="setPreset(250000, 5.5, 25)">🏠 Mortgage</button>
-                        <button class="preset-btn" onclick="setPreset(25000, 8.9, 5)">🚗 Car Loan</button>
-                        <button class="preset-btn" onclick="setPreset(10000, 12.5, 3)">💳 Personal Loan</button>
-                        <button class="preset-btn" onclick="setPreset(50000, 6.0, 10)">🏢 Business</button>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="principal">💷 Loan Amount (£)</label>
-                        <input type="number" id="principal" min="0" step="100" placeholder="e.g. 250000" oninput="calculate()">
+            <div style="background:var(--bg-card);border:1px solid var(--border);padding:32px;">
+                <div class="preset-row">
+                    <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:0.12em;align-self:center;">PRESETS:</span>
+                    <button class="preset-btn" onclick="setPreset(200000, 5.5, 25)">Mortgage 25yr</button>
+                    <button class="preset-btn" onclick="setPreset(150000, 4.5, 30)">Mortgage 30yr</button>
+                    <button class="preset-btn" onclick="setPreset(25000, 7.9, 5)">Car Loan 5yr</button>
+                    <button class="preset-btn" onclick="setPreset(10000, 9.9, 3)">Personal 3yr</button>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+                    <div class="form-field">
+                        <label for="principal">Loan Amount (£)</label>
+                        <input type="number" id="principal" min="1" step="1000" placeholder="e.g. 250000" oninput="calculate()">
                     </div>
-                    <div class="form-group">
-                        <label for="rate">📈 Annual Interest Rate (%)</label>
+                    <div class="form-field">
+                        <label for="rate">Annual Interest Rate (%)</label>
                         <input type="number" id="rate" min="0" max="100" step="0.1" placeholder="e.g. 5.5" oninput="calculate()">
                     </div>
-                    <div class="form-group">
-                        <label for="term">⏳ Loan Term (Years)</label>
+                    <div class="form-field">
+                        <label for="term">Loan Term (Years)</label>
                         <input type="number" id="term" min="1" max="50" step="1" placeholder="e.g. 25" oninput="calculate()">
                     </div>
+                </div>
 
-                    <div id="results" style="display:none;">
-                        <div class="results-grid">
-                            <div class="result-pill primary">
-                                <div class="amount" id="monthly">£0</div>
-                                <div class="pill-label">Monthly Payment</div>
-                            </div>
-                            <div class="result-pill secondary">
-                                <div class="amount" id="total">£0</div>
-                                <div class="pill-label">Total Repaid</div>
-                            </div>
-                            <div class="result-pill danger">
-                                <div class="amount" id="interest">£0</div>
-                                <div class="pill-label">Total Interest</div>
-                            </div>
+                <div id="results" style="display:none;">
+                    <div class="results-grid">
+                        <div class="result-pill">
+                            <div class="amount" id="monthly">£0</div>
+                            <div class="pill-label">Monthly Payment</div>
                         </div>
-                        <div style="margin-bottom:1.5rem;">
-                            <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.25rem;">
-                                <span style="color:var(--accent-color);">■ Principal</span>
-                                <span style="color:#ef4444;">■ Interest</span>
-                            </div>
-                            <div class="bar-wrap">
-                                <div class="bar-principal" id="bar-p"></div>
-                                <div class="bar-interest" id="bar-i"></div>
-                            </div>
-                            <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-secondary);margin-top:0.25rem;">
-                                <span id="pct-p">0%</span>
-                                <span id="pct-i">0%</span>
-                            </div>
+                        <div class="result-pill">
+                            <div class="amount neutral" id="total">£0</div>
+                            <div class="pill-label">Total Repaid</div>
+                        </div>
+                        <div class="result-pill">
+                            <div class="amount danger" id="interest">£0</div>
+                            <div class="pill-label">Total Interest</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:16px;">
+                        <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:4px;">
+                            <span style="color:var(--accent);">■ Principal <span id="pct-p">0%</span></span>
+                            <span style="color:#ef4444;">■ Interest <span id="pct-i">0%</span></span>
+                        </div>
+                        <div class="bar-wrap">
+                            <div class="bar-principal" id="bar-p"></div>
+                            <div class="bar-interest" id="bar-i"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('amort-content')">
-                <h2>Amortisation Schedule</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">02</span>
+                <h2 class="block-title">Amortisation Schedule</h2>
+                <span class="block-line" aria-hidden="true"></span>
             </div>
-            <div id="amort-content" class="section-content">
-                <div id="amort-placeholder" style="text-align:center;padding:2rem;color:var(--text-secondary);">Calculate a loan above to see the amortisation schedule.</div>
-                <div id="amort-container" style="display:none;">
-                    <div class="amort-wrapper">
-                        <table class="amort-table">
-                            <thead><tr><th>Year</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
-                            <tbody id="amort-body"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('info-content')">
-                <h2>Tips &amp; Information</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+            <p id="amort-placeholder" style="color:var(--text-muted);font-family:var(--font-mono);font-size:12px;">Enter loan details above to generate the schedule.</p>
+            <div id="amort-container" style="display:none;overflow-x:auto;">
+                <table class="amort-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Payment</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="amort-body"></tbody>
+                </table>
             </div>
-            <div id="info-content" class="section-content active">
-                <div class="info-cards">
-                    <article class="info-card"><h3>📊 APR vs Interest Rate</h3><p>The Annual Percentage Rate (APR) includes fees and is the true cost of borrowing. The interest rate alone doesn't capture arrangement fees or other charges. Always compare APR when shopping for loans.</p></article>
-                    <article class="info-card"><h3>💡 Overpayments</h3><p>Even small regular overpayments dramatically reduce total interest. Paying an extra £100/month on a 25-year mortgage can cut years off your term and save thousands in interest.</p></article>
-                    <article class="info-card"><h3>🏠 Mortgage Types</h3><p>Fixed-rate mortgages keep payments predictable. Variable/tracker rates move with the base rate. Offset mortgages link your savings to reduce the interest-bearing balance.</p></article>
-                    <article class="info-card"><h3>⚠️ Disclaimer</h3><p>This calculator is for illustrative purposes only. Actual payments may vary based on your lender's terms, fees, and payment schedule. Always consult a qualified financial adviser before borrowing.</p></article>
-                </div>
-            </div>
-        </section>
+        </div>
+
     </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">← Back to Home</a>
     </footer>
 
     <script src="../app.js"></script>
     <script>
-        function fmt(n) { return '£' + n.toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 }); }
+        const fmt = n => '£' + n.toLocaleString('en-GB', { minimumFractionDigits:2, maximumFractionDigits:2 });
 
         function calculate() {
             const P = parseFloat(document.getElementById('principal').value);
-            const r = parseFloat(document.getElementById('rate').value) / 100 / 12;
-            const n = parseFloat(document.getElementById('term').value) * 12;
-            if (!P || !r || !n || P <= 0 || n <= 0) { document.getElementById('results').style.display = 'none'; return; }
+            const annual = parseFloat(document.getElementById('rate').value);
+            const years  = parseFloat(document.getElementById('term').value);
 
+            if (!P || !annual || !years || P <= 0 || annual < 0 || years <= 0) {
+                document.getElementById('results').style.display = 'none';
+                document.getElementById('amort-container').style.display = 'none';
+                document.getElementById('amort-placeholder').style.display = 'block';
+                return;
+            }
+
+            const r = annual / 100 / 12;
+            const n = years * 12;
             const M = r === 0 ? P / n : P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-            const total = M * n;
-            const interest = total - P;
+            const total    = M * n;
+            const interestTotal = total - P;
             const pPct = Math.round((P / total) * 100);
             const iPct = 100 - pPct;
 
-            document.getElementById('monthly').textContent = fmt(M);
-            document.getElementById('total').textContent   = fmt(total);
-            document.getElementById('interest').textContent = fmt(interest);
+            document.getElementById('monthly').textContent  = fmt(M);
+            document.getElementById('total').textContent    = fmt(total);
+            document.getElementById('interest').textContent = fmt(interestTotal);
             document.getElementById('bar-p').style.width = pPct + '%';
             document.getElementById('bar-i').style.width = iPct + '%';
             document.getElementById('pct-p').textContent = pPct + '%';
             document.getElementById('pct-i').textContent = iPct + '%';
             document.getElementById('results').style.display = 'block';
 
-            // Amortisation (yearly)
             const tbody = document.getElementById('amort-body');
-            const years = Math.ceil(n / 12);
             let balance = P, rows = '';
-            for (let y = 1; y <= years; y++) {
+            for (let y = 1; y <= Math.ceil(n / 12); y++) {
                 const months = Math.min(12, n - (y - 1) * 12);
                 let yearPrincipal = 0, yearInterest = 0, yearPayment = 0;
                 for (let m = 0; m < months; m++) {
-                    const intPayment = balance * r;
-                    const princPayment = Math.min(M - intPayment, balance);
-                    yearInterest += intPayment;
-                    yearPrincipal += princPayment;
-                    yearPayment += M;
-                    balance -= princPayment;
+                    const intP = balance * r;
+                    const prP  = Math.min(M - intP, balance);
+                    yearInterest  += intP;
+                    yearPrincipal += prP;
+                    yearPayment   += M;
+                    balance -= prP;
                     if (balance < 0.01) balance = 0;
                 }
-                rows += `<tr>
-                    <td>${y}</td>
-                    <td>${fmt(yearPayment)}</td>
-                    <td>${fmt(yearPrincipal)}</td>
-                    <td>${fmt(yearInterest)}</td>
-                    <td>${fmt(Math.max(0, balance))}</td>
-                </tr>`;
+                rows += `<tr><td>${y}</td><td>${fmt(yearPayment)}</td><td>${fmt(yearPrincipal)}</td><td>${fmt(yearInterest)}</td><td>${fmt(Math.max(0, balance))}</td></tr>`;
             }
             tbody.innerHTML = rows;
             document.getElementById('amort-placeholder').style.display = 'none';

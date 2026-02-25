@@ -4,178 +4,96 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Convert colours between HEX, RGB, HSL, and CMYK formats instantly.">
-    <meta property="og:title" content="Color Converter - Streets Services">
-    <meta property="og:description" content="Convert colours between HEX, RGB, HSL, and CMYK formats instantly.">
-    <meta property="og:image" content="https://streetsservices.co.uk/pictures/icon.png">
-    <meta property="og:url" content="https://streetsservices.co.uk/pages/color-converter.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
     <title>Color Converter - Streets Services</title>
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <link rel="canonical" href="https://streetsservices.co.uk/pages/color-converter.html">
+    <style>
+        .color-output{background:var(--bg-card,#1a1a1a);border:1px solid var(--border,#2a2a2a);border-radius:10px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem;}
+        .color-output label{color:var(--text-dim,#888);font-size:.82rem;min-width:60px;}
+        .color-value{color:var(--accent);font-family:'Courier New',monospace;font-size:1rem;font-weight:700;flex:1;}
+        .color-copy{background:transparent;border:1px solid var(--border,#2a2a2a);color:var(--text-dim,#888);padding:.3rem .8rem;border-radius:6px;cursor:pointer;transition:all .2s;font-size:.82rem;}
+        .color-copy:hover{border-color:var(--accent);color:var(--accent);}
+    </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Color Converter</h1>
-        </div>
-        <p class="tagline">Convert Between Color Formats</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a> <span class="sep">/</span> color-converter
+    </nav>
+    <header class="page-header">
+        <p class="page-eyebrow">Converters</p>
+        <h1>Color Converter</h1>
+        <p>Convert between HEX, RGB, HSL, and CMYK colour formats instantly.</p>
     </header>
-
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('picker-content')">
-                <h2>Color Picker</h2>
-                <span class="toggle-icon">▼</span>
+    <main id="main" class="content">
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Picker &amp; Outputs</h2>
+                <span class="block-line"></span>
             </div>
-            <div id="picker-content" class="section-content active">
-                <div class="calculator-container">
-                    <div style="display:flex;align-items:center;gap:2rem;margin-bottom:2rem;">
-                        <input type="color" id="picker" value="#3b82f6" style="width:120px;height:120px;border:none;cursor:pointer;border-radius:var(--radius-sm);">
-                        <div style="flex:1;">
-                            <div style="color:var(--text-secondary);margin-bottom:0.5rem;">Selected Color</div>
-                            <div id="currentColor" style="font-size:2rem;font-weight:700;color:var(--accent-color);">#3B82F6</div>
-                        </div>
+            <div class="calculator-container">
+                <div style="display:flex;align-items:center;gap:2rem;margin-bottom:2rem;flex-wrap:wrap;">
+                    <input type="color" id="picker" value="#00e5cc" style="width:100px;height:100px;border:none;cursor:pointer;border-radius:10px;">
+                    <div style="flex:1;">
+                        <div style="color:var(--text-dim,#888);margin-bottom:.5rem;">Selected Colour</div>
+                        <div id="currentColor" style="font-size:1.8rem;font-weight:700;color:var(--accent);">#00E5CC</div>
                     </div>
-                    <div id="preview" style="height:120px;border-radius:var(--radius-sm);margin-bottom:2rem;background:#3b82f6;transition:background 0.3s;"></div>
                 </div>
+                <div id="preview" style="height:100px;border-radius:10px;margin-bottom:2rem;background:#00e5cc;transition:background .3s;"></div>
+                <div class="color-output"><label>HEX</label><span class="color-value" id="hex">#00E5CC</span><button class="color-copy" onclick="copy('hex',this)">Copy</button></div>
+                <div class="color-output"><label>RGB</label><span class="color-value" id="rgb">rgb(0, 229, 204)</span><button class="color-copy" onclick="copy('rgb',this)">Copy</button></div>
+                <div class="color-output"><label>HSL</label><span class="color-value" id="hsl">hsl(174, 100%, 45%)</span><button class="color-copy" onclick="copy('hsl',this)">Copy</button></div>
+                <div class="color-output"><label>CMYK</label><span class="color-value" id="cmyk">cmyk(100, 0, 11, 10)</span><button class="color-copy" onclick="copy('cmyk',this)">Copy</button></div>
             </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('formats-content')">
-                <h2>Color Formats</h2>
-                <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">02</span>
+                <h2 class="block-title">Input Colour</h2>
+                <span class="block-line"></span>
             </div>
-            <div id="formats-content" class="section-content active">
-                <div class="generators-grid">
-                    <div class="generator-section">
-                        <h3>HEX</h3>
-                        <div class="result-display" id="hex" style="font-family:'Courier New',monospace;">#3B82F6</div>
-                        <button class="generator-button" onclick="copy('hex', this)">Copy</button>
+            <div class="calculator-container">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+                    <div class="form-group">
+                        <label>HEX</label>
+                        <input type="text" id="hexInput" placeholder="#00E5CC">
                     </div>
-                    <div class="generator-section">
-                        <h3>RGB</h3>
-                        <div class="result-display" id="rgb" style="font-family:'Courier New',monospace;">rgb(59, 130, 246)</div>
-                        <button class="generator-button" onclick="copy('rgb', this)">Copy</button>
-                    </div>
-                    <div class="generator-section">
-                        <h3>HSL</h3>
-                        <div class="result-display" id="hsl" style="font-family:'Courier New',monospace;">hsl(217, 91%, 60%)</div>
-                        <button class="generator-button" onclick="copy('hsl', this)">Copy</button>
-                    </div>
-                    <div class="generator-section">
-                        <h3>CMYK</h3>
-                        <div class="result-display" id="cmyk" style="font-family:'Courier New',monospace;">cmyk(76, 47, 0, 4)</div>
-                        <button class="generator-button" onclick="copy('cmyk', this)">Copy</button>
+                    <div class="form-group">
+                        <label>RGB (r, g, b)</label>
+                        <input type="text" id="rgbInput" placeholder="0, 229, 204">
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('input-content')">
-                <h2>Input Color</h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <!-- Input section now starts open -->
-            <div id="input-content" class="section-content active">
-                <div class="calculator-container">
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
-                        <div>
-                            <label style="display:block;color:var(--accent-color);margin-bottom:0.5rem;font-weight:600;">HEX</label>
-                            <input type="text" id="hexInput" placeholder="#3B82F6" style="padding:0.75rem;background:var(--bg-dark);border:1px solid var(--border-color);color:var(--text-primary);border-radius:var(--radius-sm);width:100%;">
-                        </div>
-                        <div>
-                            <label style="display:block;color:var(--accent-color);margin-bottom:0.5rem;font-weight:600;">RGB (r, g, b)</label>
-                            <input type="text" id="rgbInput" placeholder="59, 130, 246" style="padding:0.75rem;background:var(--bg-dark);border:1px solid var(--border-color);color:var(--text-primary);border-radius:var(--radius-sm);width:100%;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
-
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">&larr; Back to Home</a>
     </footer>
-
     <script src="../app.js"></script>
     <script>
-        function hexToRgb(hex) {
-            const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return r ? { r: parseInt(r[1], 16), g: parseInt(r[2], 16), b: parseInt(r[3], 16) } : null;
-        }
-
-        function rgbToHex(r, g, b) {
-            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-        }
-
-        function rgbToHsl(r, g, b) {
-            r /= 255; g /= 255; b /= 255;
-            const max = Math.max(r, g, b), min = Math.min(r, g, b);
-            let h, s, l = (max + min) / 2;
-            if (max === min) { h = s = 0; }
-            else {
-                const d = max - min;
-                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-                switch (max) {
-                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-                    case g: h = ((b - r) / d + 2) / 6; break;
-                    case b: h = ((r - g) / d + 4) / 6; break;
-                }
-            }
-            return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
-        }
-
-        function rgbToCmyk(r, g, b) {
-            let c = 1 - r / 255, m = 1 - g / 255, y = 1 - b / 255, k = Math.min(c, m, y);
-            c = Math.round(((c - k) / (1 - k)) * 100) || 0;
-            m = Math.round(((m - k) / (1 - k)) * 100) || 0;
-            y = Math.round(((y - k) / (1 - k)) * 100) || 0;
-            k = Math.round(k * 100);
-            return { c, m, y, k };
-        }
-
-        function update(hex) {
-            const rgb = hexToRgb(hex);
-            if (!rgb) return;
-            const hsl  = rgbToHsl(rgb.r, rgb.g, rgb.b);
-            const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
-            document.getElementById('currentColor').textContent = hex.toUpperCase();
-            document.getElementById('preview').style.background = hex;
-            document.getElementById('picker').value = hex;
-            document.getElementById('hex').textContent  = hex.toUpperCase();
-            document.getElementById('rgb').textContent  = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-            document.getElementById('hsl').textContent  = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
-            document.getElementById('cmyk').textContent = `cmyk(${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k})`;
-        }
-
-        document.getElementById('picker').addEventListener('input', e => update(e.target.value));
-
-        document.getElementById('hexInput').addEventListener('input', e => {
-            const hex = e.target.value.startsWith('#') ? e.target.value : '#' + e.target.value;
-            if (/^#[0-9A-F]{6}$/i.test(hex)) update(hex);
-        });
-
-        document.getElementById('rgbInput').addEventListener('input', e => {
-            const rgb = e.target.value.split(',').map(v => parseInt(v.trim()));
-            if (rgb.length === 3 && rgb.every(v => !isNaN(v) && v >= 0 && v <= 255)) {
-                update(rgbToHex(rgb[0], rgb[1], rgb[2]));
-            }
-        });
-
-        function copy(id, btn) {
-            navigator.clipboard.writeText(document.getElementById(id).textContent);
-            btn.textContent = '✓ Copied';
-            setTimeout(() => btn.textContent = 'Copy', 2000);
-        }
-
-        update('#3b82f6');
+        function hexToRgb(hex){const r=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);return r?{r:parseInt(r[1],16),g:parseInt(r[2],16),b:parseInt(r[3],16)}:null;}
+        function rgbToHex(r,g,b){return'#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);}
+        function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+        function rgbToCmyk(r,g,b){let c=1-r/255,m=1-g/255,y=1-b/255,k=Math.min(c,m,y);c=Math.round(((c-k)/(1-k))*100)||0;m=Math.round(((m-k)/(1-k))*100)||0;y=Math.round(((y-k)/(1-k))*100)||0;k=Math.round(k*100);return{c,m,y,k};}
+        function update(hex){const rgb=hexToRgb(hex);if(!rgb)return;const hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);const cmyk=rgbToCmyk(rgb.r,rgb.g,rgb.b);document.getElementById('currentColor').textContent=hex.toUpperCase();document.getElementById('preview').style.background=hex;document.getElementById('picker').value=hex;document.getElementById('hex').textContent=hex.toUpperCase();document.getElementById('rgb').textContent=`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;document.getElementById('hsl').textContent=`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;document.getElementById('cmyk').textContent=`cmyk(${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k})`;}
+        document.getElementById('picker').addEventListener('input',e=>update(e.target.value));
+        document.getElementById('hexInput').addEventListener('input',e=>{const hex=e.target.value.startsWith('#')?e.target.value:'#'+e.target.value;if(/^#[0-9A-F]{6}$/i.test(hex))update(hex);});
+        document.getElementById('rgbInput').addEventListener('input',e=>{const rgb=e.target.value.split(',').map(v=>parseInt(v.trim()));if(rgb.length===3&&rgb.every(v=>!isNaN(v)&&v>=0&&v<=255))update(rgbToHex(rgb[0],rgb[1],rgb[2]));});
+        function copy(id,btn){navigator.clipboard.writeText(document.getElementById(id).textContent);btn.textContent='✓ Copied';setTimeout(()=>btn.textContent='Copy',2000);}
+        update('#00e5cc');
     </script>
 </body>
 </html>

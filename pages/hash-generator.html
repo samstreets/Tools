@@ -17,110 +17,169 @@
     <link rel="canonical" href="https://streetsservices.co.uk/pages/hash-generator.html">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Hash Generator</h1>
-        </div>
-        <p class="tagline">Generate Cryptographic Hashes</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>hash-generator</span>
+    </nav>
+
+    <header class="page-header">
+        <p class="page-eyebrow">Tools &amp; Utilities</p>
+        <h1>Hash Generator</h1>
+        <p>Generate cryptographic hashes from text or files. MD5, SHA-1, SHA-256, and SHA-512 — all in the browser.</p>
     </header>
 
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
+    <main id="main" class="content">
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('input-content')">
-                <h2>Input</h2>
-                <span class="toggle-icon">▼</span>
+        <!-- Text Input -->
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Text Input</h2>
+                <span class="block-line" aria-hidden="true"></span>
             </div>
-            <div id="input-content" class="section-content active">
-                <div class="calculator-container">
-                    <textarea id="textInput" placeholder="Enter text to hash..." style="width:100%;min-height:120px;background:var(--bg-dark);color:var(--text-primary);border:2px solid var(--border-color);border-radius:var(--radius-sm);padding:1rem;font-family:'Courier New',monospace;margin-bottom:1rem;"></textarea>
-                    <div onclick="document.getElementById('fileInput').click()" style="padding:1.5rem;border:2px dashed var(--border-color);border-radius:var(--radius-sm);text-align:center;cursor:pointer;transition:border-color 0.2s;" id="fileZone">
-                        <input type="file" id="fileInput" style="display:none;">
-                        <div style="color:var(--accent-color);">📁 Upload File to Hash</div>
-                        <div style="color:var(--text-secondary);font-size:0.85rem;margin-top:0.25rem;">or drag and drop</div>
+
+            <div style="background:var(--bg-card);border:1px solid var(--border);padding:32px;">
+                <label style="display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:.8;margin-bottom:8px;">Enter Text</label>
+                <textarea id="textInput" placeholder="Type or paste text here..." style="width:100%;min-height:120px;background:var(--bg);color:var(--text);border:1px solid var(--border);padding:12px;font-family:var(--font-mono);font-size:13px;resize:vertical;outline:none;transition:border-color .2s;margin-bottom:1rem;" oninput="hashText(this.value)" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+
+                <div style="display:flex;flex-direction:column;gap:12px;" id="textResults">
+                    <!-- MD5 -->
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">MD5</span>
+                        <span id="md5" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHash('md5')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Copy</button>
+                    </div>
+                    <!-- SHA-1 -->
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">SHA-1</span>
+                        <span id="sha1" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHash('sha1')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Copy</button>
+                    </div>
+                    <!-- SHA-256 -->
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">SHA-256</span>
+                        <span id="sha256" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHash('sha256')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Copy</button>
+                    </div>
+                    <!-- SHA-512 -->
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">SHA-512</span>
+                        <span id="sha512" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHash('sha512')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Copy</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('hashes-content')">
-                <h2>Generated Hashes</h2>
-                <span class="toggle-icon">▼</span>
+        <!-- File Hashing -->
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">02</span>
+                <h2 class="block-title">File Hashing</h2>
+                <span class="block-line" aria-hidden="true"></span>
             </div>
-            <div id="hashes-content" class="section-content active">
-                <div class="generators-grid">
-                    <div class="generator-section">
-                        <h3>MD5</h3>
-                        <div class="result-display" id="md5" style="font-size:0.85rem;word-break:break-all;min-height:60px;">-</div>
-                        <button class="generator-button" onclick="copyHash('md5', this)">Copy</button>
+
+            <div style="background:var(--bg-card);border:1px solid var(--border);padding:32px;">
+                <div id="fileDropZone" onclick="document.getElementById('fileInput').click()" style="padding:2.5rem;border:1px dashed var(--border);text-align:center;cursor:pointer;margin-bottom:1.5rem;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <input type="file" id="fileInput" onchange="hashFile(this.files[0])" style="display:none;">
+                    <div style="color:var(--accent);font-size:1.5rem;margin-bottom:8px;">📁</div>
+                    <div style="color:var(--text-muted);font-family:var(--font-mono);font-size:12px;">Click or drag file here to hash</div>
+                </div>
+                <div id="fileHashResults" style="display:none;flex-direction:column;gap:12px;">
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">MD5</span>
+                        <span id="fileMd5" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHashVal('fileMd5')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;">Copy</button>
                     </div>
-                    <div class="generator-section">
-                        <h3>SHA-1</h3>
-                        <div class="result-display" id="sha1" style="font-size:0.85rem;word-break:break-all;min-height:60px;">-</div>
-                        <button class="generator-button" onclick="copyHash('sha1', this)">Copy</button>
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">SHA-1</span>
+                        <span id="fileSha1" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHashVal('fileSha1')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;">Copy</button>
                     </div>
-                    <div class="generator-section">
-                        <h3>SHA-256</h3>
-                        <div class="result-display" id="sha256" style="font-size:0.85rem;word-break:break-all;min-height:60px;">-</div>
-                        <button class="generator-button" onclick="copyHash('sha256', this)">Copy</button>
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">SHA-256</span>
+                        <span id="fileSha256" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHashVal('fileSha256')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;">Copy</button>
                     </div>
-                    <div class="generator-section">
-                        <h3>SHA-512</h3>
-                        <div class="result-display" id="sha512" style="font-size:0.7rem;word-break:break-all;min-height:60px;">-</div>
-                        <button class="generator-button" onclick="copyHash('sha512', this)">Copy</button>
+                    <div style="display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);">
+                        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">SHA-512</span>
+                        <span id="fileSha512" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);word-break:break-all;">—</span>
+                        <button onclick="copyHashVal('fileSha512')" style="padding:4px 12px;background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:10px;cursor:pointer;white-space:nowrap;">Copy</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">← Back to Home</a>
     </footer>
 
     <script src="../app.js"></script>
     <script>
-        function generate(input) {
-            document.getElementById('md5').textContent    = CryptoJS.MD5(input).toString();
-            document.getElementById('sha1').textContent   = CryptoJS.SHA1(input).toString();
-            document.getElementById('sha256').textContent = CryptoJS.SHA256(input).toString();
-            document.getElementById('sha512').textContent = CryptoJS.SHA512(input).toString();
+        const hashes = {};
+
+        function hashText(text) {
+            if (!text.trim()) {
+                ['md5','sha1','sha256','sha512'].forEach(id => { document.getElementById(id).textContent = '—'; hashes[id] = ''; });
+                return;
+            }
+            hashes.md5    = CryptoJS.MD5(text).toString();
+            hashes.sha1   = CryptoJS.SHA1(text).toString();
+            hashes.sha256 = CryptoJS.SHA256(text).toString();
+            hashes.sha512 = CryptoJS.SHA512(text).toString();
+            document.getElementById('md5').textContent    = hashes.md5;
+            document.getElementById('sha1').textContent   = hashes.sha1;
+            document.getElementById('sha256').textContent = hashes.sha256;
+            document.getElementById('sha512').textContent = hashes.sha512;
         }
 
-        document.getElementById('textInput').addEventListener('input', e => {
-            if (e.target.value) generate(e.target.value);
-        });
+        function copyHash(id) {
+            if (hashes[id]) navigator.clipboard.writeText(hashes[id]);
+        }
 
-        document.getElementById('fileInput').addEventListener('change', function () {
+        function copyHashVal(id) {
+            const val = document.getElementById(id).textContent;
+            if (val && val !== '—') navigator.clipboard.writeText(val);
+        }
+
+        function hashFile(file) {
+            if (!file) return;
             const reader = new FileReader();
-            reader.onload = e => generate(CryptoJS.lib.WordArray.create(e.target.result));
-            reader.readAsArrayBuffer(this.files[0]);
-        });
-
-        function copyHash(id, btn) {
-            const text = document.getElementById(id).textContent;
-            if (text && text !== '-') {
-                navigator.clipboard.writeText(text);
-                btn.textContent = '✓ Copied';
-                setTimeout(() => btn.textContent = 'Copy', 2000);
-            }
+            reader.onload = e => {
+                const wordArray = CryptoJS.lib.WordArray.create(e.target.result);
+                document.getElementById('fileMd5').textContent    = CryptoJS.MD5(wordArray).toString();
+                document.getElementById('fileSha1').textContent   = CryptoJS.SHA1(wordArray).toString();
+                document.getElementById('fileSha256').textContent = CryptoJS.SHA256(wordArray).toString();
+                document.getElementById('fileSha512').textContent = CryptoJS.SHA512(wordArray).toString();
+                document.getElementById('fileHashResults').style.display = 'flex';
+            };
+            reader.readAsArrayBuffer(file);
         }
 
-        // Drag and drop
-        const zone = document.getElementById('fileZone');
-        zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--primary-color)'; });
-        zone.addEventListener('dragleave', () => { zone.style.borderColor = 'var(--border-color)'; });
-        zone.addEventListener('drop', e => {
+        const dropZone = document.getElementById('fileDropZone');
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--accent)'; });
+        dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = 'var(--border)'; });
+        dropZone.addEventListener('drop', e => {
             e.preventDefault();
-            zone.style.borderColor = 'var(--border-color)';
-            if (e.dataTransfer.files.length) {
-                const reader = new FileReader();
-                reader.onload = ev => generate(CryptoJS.lib.WordArray.create(ev.target.result));
-                reader.readAsArrayBuffer(e.dataTransfer.files[0]);
-            }
+            dropZone.style.borderColor = 'var(--border)';
+            if (e.dataTransfer.files.length) hashFile(e.dataTransfer.files[0]);
         });
     </script>
 </body>

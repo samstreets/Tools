@@ -3,216 +3,156 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Calculate percentages — percentage of a number, percentage change, and more.">
-    <meta property="og:title" content="Percentage Calculator - Streets Services">
-    <meta property="og:description" content="Quick percentage calculations — of a number, change, increase/decrease, and more.">
-    <meta property="og:image" content="https://streetsservices.co.uk/pictures/icon.png">
-    <meta property="og:url" content="https://streetsservices.co.uk/pages/percentage-calculator.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
+    <meta name="description" content="Calculate percentages, percentage change, VAT, and more.">
     <title>Percentage Calculator - Streets Services</title>
     <link rel="icon" type="image/png" href="../pictures/icon.png">
     <link rel="stylesheet" href="../styles.css">
-    <style>
-        .calc-block { background:var(--bg-dark);padding:1.5rem;border-radius:var(--radius-lg);border:2px solid var(--border-color);margin-bottom:1.5rem;transition:border-color var(--transition-base); }
-        .calc-block:focus-within { border-color:var(--primary-color); }
-        .calc-block h3 { color:var(--accent-color);margin-bottom:1rem;font-size:1.1rem; }
-        .inline-form { display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem; }
-        .inline-form input { background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-primary);padding:0.6rem 0.75rem;border-radius:var(--radius-sm);font-size:1.1rem;font-family:'Courier New',monospace;width:110px;transition:border-color var(--transition-base); }
-        .inline-form input:focus { outline:none;border-color:var(--primary-color); }
-        .inline-form span { color:var(--text-secondary);font-size:1rem;white-space:nowrap; }
-        .mini-result { background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));padding:0.75rem 1.25rem;border-radius:var(--radius-sm);color:white;font-size:1.3rem;font-weight:700;display:inline-block;min-width:120px;text-align:center;transition:all var(--transition-base); }
-        .mini-result.positive { background:linear-gradient(135deg,#10b981,#059669); }
-        .mini-result.negative { background:linear-gradient(135deg,#ef4444,#dc2626); }
-    </style>
     <link rel="canonical" href="https://streetsservices.co.uk/pages/percentage-calculator.html">
+    <style>
+        .calc-block{background:var(--bg-card,#1a1a1a);border:1px solid var(--border,#2a2a2a);border-radius:10px;padding:1.5rem;margin-bottom:1.25rem;}
+        .calc-block h3{color:var(--accent);margin-bottom:1rem;font-size:1rem;}
+        .inline-form{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-bottom:.5rem;}
+        .inline-form input{width:110px;padding:.55rem .75rem;background:var(--bg,#0e0e0e);border:2px solid var(--border,#2a2a2a);color:var(--text,#eee);border-radius:8px;font-family:'Courier New',monospace;font-size:1rem;}
+        .inline-form input:focus{outline:none;border-color:var(--accent);}
+        .inline-form span{color:var(--text-dim,#888);white-space:nowrap;}
+        .mini-result{min-width:90px;padding:.55rem .75rem;background:var(--bg,#0e0e0e);border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-family:'Courier New',monospace;font-size:1rem;font-weight:700;text-align:center;}
+        .mini-result.positive{color:#10b981;border-color:#10b981;}
+        .mini-result.negative{color:#ef4444;border-color:#ef4444;}
+        select.inline-sel{padding:.55rem .75rem;background:var(--bg,#0e0e0e);border:2px solid var(--border,#2a2a2a);color:var(--text,#eee);border-radius:8px;font-family:inherit;}
+        .formula-note{color:var(--text-dim,#888);font-size:.82rem;margin-top:.35rem;}
+    </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <img src="../pictures/icon.png" alt="Streets Services Icon" class="header-icon" width="28" height="28">
-            <h1>Percentage Calculator</h1>
-        </div>
-        <p class="tagline">Quick Percentage Calculations</p>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <span class="nav-prompt">sam@streets:~$</span>
+        <ul class="nav-links">
+            <li><a href="../index.html">~/home</a></li>
+            <li><a href="knowledge-base.html">~/kb</a></li>
+            <li><a href="it-glossary.html">~/glossary</a></li>
+            <li><a href="contact.html">~/contact</a></li>
+        </ul>
+        <span class="nav-right">IT HUB v2.0</span>
+    </nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">home</a> <span class="sep">/</span> percentage-calculator
+    </nav>
+    <header class="page-header">
+        <p class="page-eyebrow">Calculators</p>
+        <h1>Percentage Calculator</h1>
+        <p>Six common percentage calculations — all updating live as you type.</p>
     </header>
-
-    <main class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">→</span> <span id="breadcrumb-current"></span></nav>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('calc-content')">
-                <h2>Calculators</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
+    <main id="main" class="content">
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">01</span>
+                <h2 class="block-title">Calculations</h2>
+                <span class="block-line"></span>
             </div>
-            <div id="calc-content" class="section-content active">
-
-                <!-- What is X% of Y? -->
-                <div class="calc-block">
-                    <h3>🔢 What is X% of Y?</h3>
-                    <div class="inline-form">
-                        <span>What is</span>
-                        <input type="number" id="p1-pct" placeholder="%" oninput="calc1()">
-                        <span>% of</span>
-                        <input type="number" id="p1-num" placeholder="number" oninput="calc1()">
-                        <span>=</span>
-                        <div class="mini-result" id="p1-res">—</div>
-                    </div>
-                    <p style="color:var(--text-secondary);font-size:0.875rem;" id="p1-formula">Enter values above</p>
+            <div class="calc-block">
+                <h3>What is X% of Y?</h3>
+                <div class="inline-form">
+                    <input type="number" id="p1-pct" placeholder="X%" oninput="calc1()">
+                    <span>% of</span>
+                    <input type="number" id="p1-num" placeholder="Y" oninput="calc1()">
+                    <span>=</span>
+                    <div class="mini-result" id="p1-res">—</div>
                 </div>
-
-                <!-- X is what % of Y? -->
-                <div class="calc-block">
-                    <h3>❓ X is what % of Y?</h3>
-                    <div class="inline-form">
-                        <input type="number" id="p2-x" placeholder="X" oninput="calc2()">
-                        <span>is what % of</span>
-                        <input type="number" id="p2-y" placeholder="Y" oninput="calc2()">
-                        <span>=</span>
-                        <div class="mini-result" id="p2-res">—</div>
-                    </div>
-                    <p style="color:var(--text-secondary);font-size:0.875rem;" id="p2-formula">Enter values above</p>
-                </div>
-
-                <!-- Percentage Change -->
-                <div class="calc-block">
-                    <h3>📈 Percentage Change (from X to Y)</h3>
-                    <div class="inline-form">
-                        <span>From</span>
-                        <input type="number" id="p3-from" placeholder="original" oninput="calc3()">
-                        <span>to</span>
-                        <input type="number" id="p3-to" placeholder="new value" oninput="calc3()">
-                        <span>=</span>
-                        <div class="mini-result" id="p3-res">—</div>
-                    </div>
-                    <p style="color:var(--text-secondary);font-size:0.875rem;" id="p3-formula">Enter values above</p>
-                </div>
-
-                <!-- Percentage Increase/Decrease -->
-                <div class="calc-block">
-                    <h3>➕ Increase / Decrease by %</h3>
-                    <div class="inline-form">
-                        <input type="number" id="p4-num" placeholder="number" oninput="calc4()">
-                        <select id="p4-dir" onchange="calc4()" style="padding:0.6rem 0.75rem;background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-primary);border-radius:var(--radius-sm);">
-                            <option value="inc">increased by</option>
-                            <option value="dec">decreased by</option>
-                        </select>
-                        <input type="number" id="p4-pct" placeholder="%" oninput="calc4()">
-                        <span>%  =</span>
-                        <div class="mini-result" id="p4-res">—</div>
-                    </div>
-                    <p style="color:var(--text-secondary);font-size:0.875rem;" id="p4-formula">Enter values above</p>
-                </div>
-
-                <!-- What % is X of Y out of Z? -->
-                <div class="calc-block">
-                    <h3>📊 Score / Proportion to Percentage</h3>
-                    <div class="inline-form">
-                        <input type="number" id="p5-got" placeholder="score" oninput="calc5()">
-                        <span>out of</span>
-                        <input type="number" id="p5-total" placeholder="total" oninput="calc5()">
-                        <span>=</span>
-                        <div class="mini-result" id="p5-res">—</div>
-                    </div>
-                    <p style="color:var(--text-secondary);font-size:0.875rem;" id="p5-formula">Enter values above</p>
-                </div>
-
-                <!-- Reverse percentage -->
-                <div class="calc-block">
-                    <h3>🔄 Reverse — Find Original Value</h3>
-                    <div class="inline-form">
-                        <span>If</span>
-                        <input type="number" id="p6-result" placeholder="result" oninput="calc6()">
-                        <span>is</span>
-                        <input type="number" id="p6-pct" placeholder="%" oninput="calc6()">
-                        <span>% of original, original =</span>
-                        <div class="mini-result" id="p6-res">—</div>
-                    </div>
-                    <p style="color:var(--text-secondary);font-size:0.875rem;" id="p6-formula">Enter values above</p>
-                </div>
+                <p class="formula-note" id="p1-formula">Enter values above</p>
             </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-header" onclick="toggleSection('tips-content')">
-                <h2>Percentage Tips</h2>
-                <span class="toggle-icon" aria-hidden="true">▼</span>
-            </div>
-            <div id="tips-content" class="section-content active">
-                <div class="info-cards">
-                    <article class="info-card"><h3>💡 Mental Maths Trick</h3><p>10% of any number is just moving the decimal point one place left. 5% is half of that. 1% is moving it two places. Build up complex percentages from these simple parts.</p></article>
-                    <article class="info-card"><h3>📈 % Change Formula</h3><p>((New − Old) ÷ Old) × 100. A positive result is an increase, a negative result is a decrease. The order matters — from 50 to 75 is +50%, but from 75 to 50 is −33.3%.</p></article>
-                    <article class="info-card"><h3>🔄 X% of Y = Y% of X</h3><p>Percentage is commutative! 8% of 25 = 25% of 8 = 2. Use whichever calculation is easier in your head.</p></article>
-                    <article class="info-card"><h3>💰 VAT Tip</h3><p>To find the pre-VAT price from a VAT-inclusive price (20% UK VAT), divide by 1.20. To add 20% VAT to a net price, multiply by 1.20.</p></article>
+            <div class="calc-block">
+                <h3>X is what % of Y?</h3>
+                <div class="inline-form">
+                    <input type="number" id="p2-x" placeholder="X" oninput="calc2()">
+                    <span>is what % of</span>
+                    <input type="number" id="p2-y" placeholder="Y" oninput="calc2()">
+                    <span>=</span>
+                    <div class="mini-result" id="p2-res">—</div>
                 </div>
+                <p class="formula-note" id="p2-formula">Enter values above</p>
             </div>
-        </section>
+            <div class="calc-block">
+                <h3>Percentage Change (from X to Y)</h3>
+                <div class="inline-form">
+                    <span>From</span>
+                    <input type="number" id="p3-from" placeholder="original" oninput="calc3()">
+                    <span>to</span>
+                    <input type="number" id="p3-to" placeholder="new value" oninput="calc3()">
+                    <span>=</span>
+                    <div class="mini-result" id="p3-res">—</div>
+                </div>
+                <p class="formula-note" id="p3-formula">Enter values above</p>
+            </div>
+            <div class="calc-block">
+                <h3>Increase / Decrease by %</h3>
+                <div class="inline-form">
+                    <input type="number" id="p4-num" placeholder="number" oninput="calc4()">
+                    <select id="p4-dir" class="inline-sel" onchange="calc4()">
+                        <option value="inc">increased by</option>
+                        <option value="dec">decreased by</option>
+                    </select>
+                    <input type="number" id="p4-pct" placeholder="%" oninput="calc4()">
+                    <span>% =</span>
+                    <div class="mini-result" id="p4-res">—</div>
+                </div>
+                <p class="formula-note" id="p4-formula">Enter values above</p>
+            </div>
+            <div class="calc-block">
+                <h3>X out of Y — as a percentage</h3>
+                <div class="inline-form">
+                    <input type="number" id="p5-got" placeholder="score" oninput="calc5()">
+                    <span>out of</span>
+                    <input type="number" id="p5-total" placeholder="total" oninput="calc5()">
+                    <span>=</span>
+                    <div class="mini-result" id="p5-res">—</div>
+                </div>
+                <p class="formula-note" id="p5-formula">Enter values above</p>
+            </div>
+            <div class="calc-block">
+                <h3>X is Y% of what number?</h3>
+                <div class="inline-form">
+                    <input type="number" id="p6-result" placeholder="X (result)" oninput="calc6()">
+                    <span>is</span>
+                    <input type="number" id="p6-pct" placeholder="Y%" oninput="calc6()">
+                    <span>% of =</span>
+                    <div class="mini-result" id="p6-res">—</div>
+                </div>
+                <p class="formula-note" id="p6-formula">Enter values above</p>
+            </div>
+        </div>
+        <div class="section-block">
+            <div class="block-header">
+                <span class="block-num">02</span>
+                <h2 class="block-title">Tips</h2>
+                <span class="block-line"></span>
+            </div>
+            <div class="info-cards">
+                <article class="info-card"><h3>Reverse Percentage</h3><p>To find the original value before a percentage increase, divide the new amount by (1 + rate). E.g., if £120 is after a 20% increase, the original is £120 ÷ 1.20 = £100.</p></article>
+                <article class="info-card"><h3>Commutativity Trick</h3><p>8% of 25 is the same as 25% of 8 = 2. Use whichever calculation is easier in your head.</p></article>
+                <article class="info-card"><h3>VAT Tip</h3><p>To find the pre-VAT price from a VAT-inclusive price (20% UK VAT), divide by 1.20. To add 20% VAT to a net price, multiply by 1.20.</p></article>
+            </div>
+        </div>
     </main>
-
-    <footer class="main-footer">
+    <footer class="site-footer">
         <p>&copy; 2026 Sam Streets. All rights reserved.</p>
+        <a href="../index.html">&larr; Back to Home</a>
     </footer>
-
     <script src="../app.js"></script>
     <script>
-        function r(n, dp=4) { return isNaN(n) || !isFinite(n) ? null : Math.round(n * Math.pow(10, dp)) / Math.pow(10, dp); }
-        function fmt(n) { return n === null ? '—' : n.toLocaleString('en-GB', { maximumFractionDigits: 4 }); }
-
-        function setRes(id, val, formulaId, formula, sign) {
-            const el = document.getElementById(id);
-            el.textContent = fmt(val);
-            el.className = 'mini-result' + (sign === '+' ? ' positive' : sign === '-' ? ' negative' : '');
-            if (formulaId) document.getElementById(formulaId).textContent = formula || '';
+        function r(n,dp=4){return isNaN(n)||!isFinite(n)?null:Math.round(n*Math.pow(10,dp))/Math.pow(10,dp);}
+        function fmt(n){return n===null?'—':n.toLocaleString('en-GB',{maximumFractionDigits:4});}
+        function setRes(id,val,fId,formula,sign){
+            const el=document.getElementById(id);
+            el.textContent=fmt(val);
+            el.className='mini-result'+(sign==='+'?' positive':sign==='-'?' negative':'');
+            if(fId)document.getElementById(fId).textContent=formula||'';
         }
-
-        function calc1() {
-            const pct = parseFloat(document.getElementById('p1-pct').value);
-            const num = parseFloat(document.getElementById('p1-num').value);
-            const res = r((pct / 100) * num);
-            setRes('p1-res', res, 'p1-formula', res !== null ? `${pct}% × ${num} = ${fmt(res)}` : '');
-        }
-
-        function calc2() {
-            const x = parseFloat(document.getElementById('p2-x').value);
-            const y = parseFloat(document.getElementById('p2-y').value);
-            const res = r((x / y) * 100);
-            setRes('p2-res', res !== null ? res : null, 'p2-formula', res !== null ? `(${x} ÷ ${y}) × 100 = ${fmt(res)}%` : '');
-            if (res !== null) document.getElementById('p2-res').textContent = fmt(res) + '%';
-        }
-
-        function calc3() {
-            const from = parseFloat(document.getElementById('p3-from').value);
-            const to   = parseFloat(document.getElementById('p3-to').value);
-            const res  = r(((to - from) / from) * 100);
-            const sign = res > 0 ? '+' : res < 0 ? '-' : '';
-            setRes('p3-res', res, 'p3-formula',
-                res !== null ? `((${to} − ${from}) ÷ ${from}) × 100 = ${sign}${fmt(Math.abs(res))}%` : '', sign || '');
-            if (res !== null) document.getElementById('p3-res').textContent = (res > 0 ? '+' : '') + fmt(res) + '%';
-        }
-
-        function calc4() {
-            const num = parseFloat(document.getElementById('p4-num').value);
-            const pct = parseFloat(document.getElementById('p4-pct').value);
-            const dir = document.getElementById('p4-dir').value;
-            const factor = dir === 'inc' ? 1 + pct / 100 : 1 - pct / 100;
-            const res = r(num * factor);
-            setRes('p4-res', res, 'p4-formula',
-                res !== null ? `${num} × ${factor.toFixed(4)} = ${fmt(res)}` : '', dir === 'inc' ? '+' : '-');
-        }
-
-        function calc5() {
-            const got   = parseFloat(document.getElementById('p5-got').value);
-            const total = parseFloat(document.getElementById('p5-total').value);
-            const res   = r((got / total) * 100);
-            setRes('p5-res', res, 'p5-formula', res !== null ? `${got} ÷ ${total} × 100 = ${fmt(res)}%` : '');
-            if (res !== null) document.getElementById('p5-res').textContent = fmt(res) + '%';
-        }
-
-        function calc6() {
-            const result = parseFloat(document.getElementById('p6-result').value);
-            const pct    = parseFloat(document.getElementById('p6-pct').value);
-            const res    = r((result / pct) * 100);
-            setRes('p6-res', res, 'p6-formula', res !== null ? `${result} ÷ (${pct}/100) = ${fmt(res)}` : '');
-        }
+        function calc1(){const p=parseFloat(document.getElementById('p1-pct').value),n=parseFloat(document.getElementById('p1-num').value);const res=r((p/100)*n);setRes('p1-res',res,'p1-formula',res!==null?`${p}% × ${n} = ${fmt(res)}`:'');}
+        function calc2(){const x=parseFloat(document.getElementById('p2-x').value),y=parseFloat(document.getElementById('p2-y').value);const res=r((x/y)*100);setRes('p2-res',res,'p2-formula',res!==null?`(${x} ÷ ${y}) × 100 = ${fmt(res)}%`:'');if(res!==null)document.getElementById('p2-res').textContent=fmt(res)+'%';}
+        function calc3(){const from=parseFloat(document.getElementById('p3-from').value),to=parseFloat(document.getElementById('p3-to').value);const res=r(((to-from)/from)*100);const sign=res>0?'+':res<0?'-':'';setRes('p3-res',res,'p3-formula',res!==null?`((${to} − ${from}) ÷ ${from}) × 100 = ${sign}${fmt(Math.abs(res))}%`:'',sign||'');if(res!==null)document.getElementById('p3-res').textContent=(res>0?'+':'')+fmt(res)+'%';}
+        function calc4(){const num=parseFloat(document.getElementById('p4-num').value),pct=parseFloat(document.getElementById('p4-pct').value),dir=document.getElementById('p4-dir').value;const factor=dir==='inc'?1+pct/100:1-pct/100;const res=r(num*factor);setRes('p4-res',res,'p4-formula',res!==null?`${num} × ${factor.toFixed(4)} = ${fmt(res)}`:'',dir==='inc'?'+':'-');}
+        function calc5(){const got=parseFloat(document.getElementById('p5-got').value),total=parseFloat(document.getElementById('p5-total').value);const res=r((got/total)*100);setRes('p5-res',res,'p5-formula',res!==null?`${got} ÷ ${total} × 100 = ${fmt(res)}%`:'');if(res!==null)document.getElementById('p5-res').textContent=fmt(res)+'%';}
+        function calc6(){const result=parseFloat(document.getElementById('p6-result').value),pct=parseFloat(document.getElementById('p6-pct').value);const res=r((result/pct)*100);setRes('p6-res',res,'p6-formula',res!==null?`${result} ÷ (${pct}/100) = ${fmt(res)}`:'');}
     </script>
 </body>
 </html>
